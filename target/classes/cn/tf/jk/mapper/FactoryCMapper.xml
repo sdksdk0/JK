@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.FactoryCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.FactoryC" >
+    <id column="FACTORY_ID" property="factoryId" jdbcType="VARCHAR" />
+    <result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
+    <result column="FACTORY_NAME" property="factoryName" jdbcType="VARCHAR" />
+    <result column="CONTACTS" property="contacts" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+    <result column="INSPECTOR" property="inspector" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="CHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DEPT" property="createDept" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FACTORY_ID, FULL_NAME, FACTORY_NAME, CONTACTS, PHONE, MOBILE, FAX, NOTE, INSPECTOR, 
+    STATE, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from FACTORY_C
+    where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FACTORY_C
+    where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.FactoryC" >
+    insert into FACTORY_C (FACTORY_ID, FULL_NAME, FACTORY_NAME, 
+      CONTACTS, PHONE, MOBILE, 
+      FAX, NOTE, INSPECTOR, 
+      STATE, ORDER_NO, CREATE_BY, 
+      CREATE_DEPT, CREATE_TIME)
+    values (#{factoryId,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
+      #{contacts,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{inspector,jdbcType=VARCHAR}, 
+      #{state,jdbcType=CHAR}, #{orderNo,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDept,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.FactoryC" >
+    insert into FACTORY_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="factoryId != null" >
+        FACTORY_ID,
+      </if>
+      <if test="fullName != null" >
+        FULL_NAME,
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME,
+      </if>
+      <if test="contacts != null" >
+        CONTACTS,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+      <if test="inspector != null" >
+        INSPECTOR,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tf.jk.po.FactoryC" >
+    update FACTORY_C
+    <set >
+      <if test="fullName != null" >
+        FULL_NAME = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        CONTACTS = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        INSPECTOR = #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.FactoryC" >
+    update FACTORY_C
+    set FULL_NAME = #{fullName,jdbcType=VARCHAR},
+      FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      CONTACTS = #{contacts,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR},
+      INSPECTOR = #{inspector,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=CHAR},
+      ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>
