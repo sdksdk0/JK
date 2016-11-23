@@ -40,7 +40,7 @@
 	<font color="blue"><b>标题</b></font>
 <hr>
 
-    XXX列表
+    生产厂家列表
   </div> 
   </div>
   </div>
@@ -58,16 +58,25 @@
 		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
 		<td class="tableHeader">序号</td>
 		<td class="tableHeader">厂家全称</td>
-		<td class="tableHeader">缩写</td>
+		<td class="tableHeader">联系人</td>
+		<td class="tableHeader">电话</td>
+		<td class="tableHeader">手机</td>
+		<td class="tableHeader">传真</td>
+		<td class="tableHeader">验货员</td>
 	</tr>
 	</thead>
 	<tbody class="tableBody" >
 	
 	<c:forEach items="${dataList}" var="o" varStatus="status">
 	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
-		<td><input type="checkbox" name="id" value="${o.id}"/></td>
+		<td><input type="checkbox" name="factoryId" value="${o.factoryId}"/></td>
 		<td>${status.index+1}</td>
-		<td><a href="toview.action?id=${o.id}">${o.fullName}</a></td>
+		<td><a href="toview.action?id=${o.factoryId}">${o.fullName}</a></td>
+		<td>${o.factoryName}</td>
+		<td>${o.phone}</td>
+		<td>${o.mobile}</td>
+		<td>${o.fax}</td>
+		<td>${o.inspector}</td>
 	</tr>
 	</c:forEach>
 	

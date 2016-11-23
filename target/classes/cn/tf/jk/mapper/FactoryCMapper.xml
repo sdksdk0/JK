@@ -196,4 +196,10 @@
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
     where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="find"  parameterType="map"   resultMap="BaseResultMap">
+  		select * from  factory_c
+  </select>
+  
+  
 </mapper>
