@@ -1,7 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<hr>
-	<font color="blue"><b>引入CSS、JS区域</b></font>
-<hr>
+
 
 <%@ include file="../../baselist.jsp"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,11 +16,9 @@
   <div id="navMenubar">
 <ul>
 
-<hr>
-	<font color="blue"><b>按钮区域</b></font>
-<hr>
 
 <li id="view"><a href="#" onclick="formSubmit('toview.action','_self');this.blur();">查看</a></li>
+<li id="new"><a href="#" onclick="formSubmit('toCreate.action','_self');this.blur();">新增</a></li>
  
 </ul>
   </div>
@@ -36,9 +32,7 @@
   <div class="textbox-inner-header">
   <div class="textbox-title">
 
-<hr>
-	<font color="blue"><b>标题</b></font>
-<hr>
+
 
     生产厂家列表
   </div> 
@@ -47,9 +41,7 @@
   
 <div>
 	
-<hr>
-	<font color="blue"><b>列表区域</b></font>
-<hr>
+
 
 <div class="eXtremeTable" >
 <table id="ec_table" class="tableRegion" width="98%" >

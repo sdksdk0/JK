@@ -3,6 +3,7 @@ package cn.tf.jk.service.impl;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,10 @@ public class FactoryCServiceImpl implements FactoryCService{
 	}
 
 	@Override
-	public void insert(FactoryC entity) {
-		// TODO Auto-generated method stub
+	public void insert(FactoryC factory) {
+		
+		factory.setFactoryId(UUID.randomUUID().toString());
+		factoryCDao.insert(factory);
 		
 	}
 
