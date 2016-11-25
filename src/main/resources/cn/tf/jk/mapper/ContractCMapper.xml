@@ -44,12 +44,12 @@
 <!-- 删除一条 -->
    <delete id="deleteById" parameterType="java.lang.String" >
     delete from CONTRACT_C
-    where contractId = #{contractId,jdbcType=VARCHAR}
+    where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
   </delete>
   <!-- 删除多条 -->
   <delete id="delete" parameterType="java.lang.String" >
     delete from CONTRACT_C
-    where contractId   in 
+    where CONTRACT_ID  in 
     
     <foreach collection="array"  item="contractId"  open="("  close=")"  separator=",">
     	 #{contractId,jdbcType=VARCHAR}
@@ -59,7 +59,7 @@
    <!-- 修改状态 -->
   <update id="updateState"   parameterType="map">
   		update CONTRACT_C  set state=#{state}
-  		 where contractId in
+  		 where CONTRACT_ID in
   		 <foreach collection="ids"  item="contractId"  open="("  close=")"  separator=",">
     	 #{contractId,jdbcType=VARCHAR}
     </foreach>  

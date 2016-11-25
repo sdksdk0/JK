@@ -23,7 +23,7 @@
         <div class="panel-title">货运管理</div>
         <div class="panel-content">
 			<ul>
-				<li><a href="#" onclick="linkHighlighted(this)" target="main" id="aa_1">购销合同</a></li>
+				<li><a href="${ctx }/cargo/contract/list.action" onclick="linkHighlighted(this)" target="main" id="aa_1">购销合同</a></li>
 			</ul>
         </div>
         </div>

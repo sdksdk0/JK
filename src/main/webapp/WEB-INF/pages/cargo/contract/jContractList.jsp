@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 
 <%@ include file="../../baselist.jsp"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,14 +56,17 @@
 	<tr>
 		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
 		<td class="tableHeader">序号</td>
+		<td class="tableHeader">客户名称</td>
 		<td class="tableHeader">合同号</td>
-		<td class="tableHeader">缩写</td>
-		<td class="tableHeader">联系人</td>
 		<td class="tableHeader">制单人</td>
-		<td class="tableHeader">手机</td>
-		<td class="tableHeader">传真</td>
+		<td class="tableHeader">审单人</td>
+		<td class="tableHeader">验货员</td>
 		<td class="tableHeader">签单日期</td>
+		<td class="tableHeader">交货期限</td>
+		<td class="tableHeader">船期</td>
+		<td class="tableHeader">总金额</td>
 		<td class="tableHeader">状态</td>
+	
 	</tr>
 	</thead>
 	<tbody class="tableBody" >
@@ -72,15 +75,18 @@
 	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
 		<td><input type="checkbox" name="contractId" value="${o.contractId}"/></td>
 		<td>${status.index+1}</td>
-		<td><a href="toview.action?id=${o.contractId}">${o.fullName}</a></td>
-		<td>${o.factoryName}</td>
-		<td>${o.phone}</td>
-		<td>${o.mobile}</td>
-		<td>${o.fax}</td>
-		<td>${o.signingDate}</td>
+		<td><a href="toview.action?id=${o.contractId}">${o.customName}</a></td>
+		<td>${o.contractNo}</td>
+		<td>${o.inputBy}</td>
+		<td>${o.checkBy}</td>
+		<td>${o.inspector}</td>
+		<td><fmt:formatDate value="${o.signingDate }"  pattern="yyyy-MM-dd" /> </td>
+		<td><fmt:formatDate value="${o.deliveryPeriod }"  pattern="yyyy-MM-dd" /> </td>
+		<td><fmt:formatDate value="${o.shipTime }"  pattern="yyyy-MM-dd" /> </td>
+		<td>${o.totalAmount}</td>
 		<td>
-			<c:if test="${o.state==1}"><a href="stop.action?contractId=${o.contractId }" ><font color="green">启用</font></a></c:if>
-			<c:if test="${o.state==0}"><a href="start.action?contractId=${o.contractId }" ><font color="red">停用</font></a></c:if>
+			<c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
+			<c:if test="${o.state==0}">草稿</c:if>
 		</td>
 	</tr>
 	</c:forEach>
