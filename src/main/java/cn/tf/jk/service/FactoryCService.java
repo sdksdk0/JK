@@ -17,5 +17,10 @@ public interface FactoryCService {
 	public void deleteById(Serializable id);		//按id删除，删除一条；支持整数型和字符串类型ID
 	public void delete(Serializable[] ids);	
 	
+	//启用
+	public void start(Serializable[] ids);
+	
+	//停用
+	public void stop(Serializable[] ids);
 
 }

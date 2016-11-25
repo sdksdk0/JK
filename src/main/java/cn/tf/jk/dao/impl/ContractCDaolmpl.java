@@ -4,14 +4,16 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import cn.tf.jk.dao.ContractCDao;
 import cn.tf.jk.dao.FactoryCDao;
+import cn.tf.jk.po.ContractC;
 import cn.tf.jk.po.FactoryC;
 
 @Repository
-public class FactoryCDaolmpl extends BaseDaoImpl<FactoryC>  implements  FactoryCDao{
+public class ContractCDaolmpl extends BaseDaoImpl<ContractC>  implements  ContractCDao{
 
-	public FactoryCDaolmpl(){
-		super.setNs("cn.tf.jk.mapper.FactoryCMapper");
+	public ContractCDaolmpl(){
+		super.setNs("cn.tf.jk.mapper.ContractCMapper");
 	}
 
 	@Override

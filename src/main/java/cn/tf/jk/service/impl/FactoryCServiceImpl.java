@@ -1,6 +1,7 @@
 package cn.tf.jk.service.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -44,6 +45,7 @@ public class FactoryCServiceImpl implements FactoryCService{
 	public void insert(FactoryC factory) {
 		
 		factory.setFactoryId(UUID.randomUUID().toString());
+		factory.setState("1");   //启用生产厂家
 		factoryCDao.insert(factory);
 		
 	}
@@ -63,6 +65,26 @@ public class FactoryCServiceImpl implements FactoryCService{
 	@Override
 	public void delete(Serializable[] ids) {
 		factoryCDao.delete(ids);
+		
+	}
+
+	@Override
+	public void start(Serializable[] ids) {
+		Map map=new HashMap<>();
+		map.put("state", 1);  //启用
+		map.put("ids", ids);
+		
+		factoryCDao.updateState(map);
+		
+	}
+
+	@Override
+	public void stop(Serializable[] ids) {
+		Map map=new HashMap<>();
+		map.put("state", 0);  //停用
+		map.put("ids", ids);
+		
+		factoryCDao.updateState(map);
 		
 	}
 

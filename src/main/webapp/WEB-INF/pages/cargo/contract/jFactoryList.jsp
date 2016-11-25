@@ -24,8 +24,8 @@
 <!-- <li id="delete"><a href="#" onclick="formSubmit('deleteById.action','_self');this.blur();">删除一条</a></li>
   -->  
   
-<li id="new"><a href="#" onclick="formSubmit('start.action','_self');this.blur();">启用</a></li>
-<li id="new"><a href="#" onclick="formSubmit('stop.action','_self');this.blur();">停用</a></li>
+<li id="new"><a href="#" onclick="formSubmit('submit.action','_self');this.blur();">上报</a></li>
+<li id="new"><a href="#" onclick="formSubmit('cancel.action','_self');this.blur();">取消</a></li>
  
 </ul>
   </div>
@@ -41,7 +41,7 @@
 
 
 
-    生产厂家列表
+    购销合同列表
   </div> 
   </div>
   </div>
@@ -56,12 +56,13 @@
 	<tr>
 		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
 		<td class="tableHeader">序号</td>
-		<td class="tableHeader">厂家全称</td>
+		<td class="tableHeader">合同号</td>
+		<td class="tableHeader">缩写</td>
 		<td class="tableHeader">联系人</td>
-		<td class="tableHeader">电话</td>
+		<td class="tableHeader">制单人</td>
 		<td class="tableHeader">手机</td>
 		<td class="tableHeader">传真</td>
-		<td class="tableHeader">验货员</td>
+		<td class="tableHeader">签单日期</td>
 		<td class="tableHeader">状态</td>
 	</tr>
 	</thead>
@@ -69,17 +70,17 @@
 	
 	<c:forEach items="${dataList}" var="o" varStatus="status">
 	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
-		<td><input type="checkbox" name="factoryId" value="${o.factoryId}"/></td>
+		<td><input type="checkbox" name="contractId" value="${o.contractId}"/></td>
 		<td>${status.index+1}</td>
-		<td><a href="toview.action?id=${o.factoryId}">${o.fullName}</a></td>
+		<td><a href="toview.action?id=${o.contractId}">${o.fullName}</a></td>
 		<td>${o.factoryName}</td>
 		<td>${o.phone}</td>
 		<td>${o.mobile}</td>
 		<td>${o.fax}</td>
-		<td>${o.inspector}</td>
+		<td>${o.signingDate}</td>
 		<td>
-			<c:if test="${o.state==1}"><a href="stop.action?factoryId=${o.factoryId }" ><font color="green">启用</font></a></c:if>
-			<c:if test="${o.state==0}"><a href="start.action?factoryId=${o.factoryId }" ><font color="red">停用</font></a></c:if>
+			<c:if test="${o.state==1}"><a href="stop.action?contractId=${o.contractId }" ><font color="green">启用</font></a></c:if>
+			<c:if test="${o.state==0}"><a href="start.action?contractId=${o.contractId }" ><font color="red">停用</font></a></c:if>
 		</td>
 	</tr>
 	</c:forEach>

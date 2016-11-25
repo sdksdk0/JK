@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.ContractCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.ContractC" >
+    <id column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+    <result column="OFFEROR" property="offeror" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NO" property="contractNo" jdbcType="VARCHAR" />
+    <result column="SIGNING_DATE" property="signingDate" jdbcType="TIMESTAMP" />
+    <result column="INPUT_BY" property="inputBy" jdbcType="VARCHAR" />
+    <result column="CHECK_BY" property="checkBy" jdbcType="VARCHAR" />
+    <result column="INSPECTOR" property="inspector" jdbcType="VARCHAR" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="IMPORT_NUM" property="importNum" jdbcType="DECIMAL" />
+    <result column="CREQUEST" property="crequest" jdbcType="VARCHAR" />
+    <result column="CUSTOM_NAME" property="customName" jdbcType="VARCHAR" />
+    <result column="DELIVERY_PERIOD" property="deliveryPeriod" jdbcType="TIMESTAMP" />
+    <result column="SHIP_TIME" property="shipTime" jdbcType="TIMESTAMP" />
+    <result column="TRADE_TERMS" property="tradeTerms" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="PRINT_STYLE" property="printStyle" jdbcType="CHAR" />
+    <result column="OLD_STATE" property="oldState" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="OUT_STATE" property="outState" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DEPT" property="createDept" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CONTRACT_ID, OFFEROR, CONTRACT_NO, SIGNING_DATE, INPUT_BY, CHECK_BY, INSPECTOR, TOTAL_AMOUNT, 
+    IMPORT_NUM, CREQUEST, CUSTOM_NAME, DELIVERY_PERIOD, SHIP_TIME, TRADE_TERMS, REMARK, 
+    PRINT_STYLE, OLD_STATE, STATE, OUT_STATE, CREATE_BY, CREATE_DEPT, CREATE_TIME
+  </sql>
+  
+  
+  <select id="find"  parameterType="map"  resultMap="BaseResultMap">
+  		select  * from CONTRACT_C where 1=1
+  </select>
+  
+  <select id="get"  parameterType="string"  resultMap="BaseResultMap">
+  		select * from CONTRACT_C
+  		 where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
+  </select>
+  
+<!-- 删除一条 -->
+   <delete id="deleteById" parameterType="java.lang.String" >
+    delete from CONTRACT_C
+    where contractId = #{contractId,jdbcType=VARCHAR}
+  </delete>
+  <!-- 删除多条 -->
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from CONTRACT_C
+    where contractId   in 
+    
+    <foreach collection="array"  item="contractId"  open="("  close=")"  separator=",">
+    	 #{contractId,jdbcType=VARCHAR}
+    </foreach>  
+  </delete>
+  
+   <!-- 修改状态 -->
+  <update id="updateState"   parameterType="map">
+  		update CONTRACT_C  set state=#{state}
+  		 where contractId in
+  		 <foreach collection="ids"  item="contractId"  open="("  close=")"  separator=",">
+    	 #{contractId,jdbcType=VARCHAR}
+    </foreach>  
+  </update>
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CONTRACT_C
+    where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CONTRACT_C
+    where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.ContractC" >
+    insert into CONTRACT_C (CONTRACT_ID, OFFEROR, CONTRACT_NO, 
+      SIGNING_DATE, INPUT_BY, CHECK_BY, 
+      INSPECTOR, TOTAL_AMOUNT, IMPORT_NUM, 
+      CREQUEST, CUSTOM_NAME, DELIVERY_PERIOD, 
+      SHIP_TIME, TRADE_TERMS, REMARK, 
+      PRINT_STYLE, OLD_STATE, STATE, 
+      OUT_STATE, CREATE_BY, CREATE_DEPT, 
+      CREATE_TIME)
+    values (#{contractId,jdbcType=VARCHAR}, #{offeror,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, 
+      #{signingDate,jdbcType=TIMESTAMP}, #{inputBy,jdbcType=VARCHAR}, #{checkBy,jdbcType=VARCHAR}, 
+      #{inspector,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, #{importNum,jdbcType=DECIMAL}, 
+      #{crequest,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{deliveryPeriod,jdbcType=TIMESTAMP}, 
+      #{shipTime,jdbcType=TIMESTAMP}, #{tradeTerms,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{printStyle,jdbcType=CHAR}, #{oldState,jdbcType=DECIMAL}, 0, 
+      #{outState,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, #{createDept,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.ContractC" >
+    insert into CONTRACT_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        CONTRACT_ID,
+      </if>
+      <if test="offeror != null" >
+        OFFEROR,
+      </if>
+      <if test="contractNo != null" >
+        CONTRACT_NO,
+      </if>
+      <if test="signingDate != null" >
+        SIGNING_DATE,
+      </if>
+      <if test="inputBy != null" >
+        INPUT_BY,
+      </if>
+      <if test="checkBy != null" >
+        CHECK_BY,
+      </if>
+      <if test="inspector != null" >
+        INSPECTOR,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="importNum != null" >
+        IMPORT_NUM,
+      </if>
+      <if test="crequest != null" >
+        CREQUEST,
+      </if>
+      <if test="customName != null" >
+        CUSTOM_NAME,
+      </if>
+      <if test="deliveryPeriod != null" >
+        DELIVERY_PERIOD,
+      </if>
+      <if test="shipTime != null" >
+        SHIP_TIME,
+      </if>
+      <if test="tradeTerms != null" >
+        TRADE_TERMS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="printStyle != null" >
+        PRINT_STYLE,
+      </if>
+      <if test="oldState != null" >
+        OLD_STATE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="outState != null" >
+        OUT_STATE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="offeror != null" >
+        #{offeror,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signingDate != null" >
+        #{signingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputBy != null" >
+        #{inputBy,jdbcType=VARCHAR},
+      </if>
+      <if test="checkBy != null" >
+        #{checkBy,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="importNum != null" >
+        #{importNum,jdbcType=DECIMAL},
+      </if>
+      <if test="crequest != null" >
+        #{crequest,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null" >
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryPeriod != null" >
+        #{deliveryPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipTime != null" >
+        #{shipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeTerms != null" >
+        #{tradeTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="printStyle != null" >
+        #{printStyle,jdbcType=CHAR},
+      </if>
+      <if test="oldState != null" >
+        #{oldState,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="outState != null" >
+        #{outState,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.ContractC" >
+    update CONTRACT_C
+    <set >
+      <if test="offeror != null" >
+        OFFEROR = #{offeror,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        CONTRACT_NO = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signingDate != null" >
+        SIGNING_DATE = #{signingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputBy != null" >
+        INPUT_BY = #{inputBy,jdbcType=VARCHAR},
+      </if>
+      <if test="checkBy != null" >
+        CHECK_BY = #{checkBy,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        INSPECTOR = #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="importNum != null" >
+        IMPORT_NUM = #{importNum,jdbcType=DECIMAL},
+      </if>
+      <if test="crequest != null" >
+        CREQUEST = #{crequest,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null" >
+        CUSTOM_NAME = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryPeriod != null" >
+        DELIVERY_PERIOD = #{deliveryPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipTime != null" >
+        SHIP_TIME = #{shipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeTerms != null" >
+        TRADE_TERMS = #{tradeTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="printStyle != null" >
+        PRINT_STYLE = #{printStyle,jdbcType=CHAR},
+      </if>
+      <if test="oldState != null" >
+        OLD_STATE = #{oldState,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="outState != null" >
+        OUT_STATE = #{outState,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.ContractC" >
+    update CONTRACT_C
+    set OFFEROR = #{offeror,jdbcType=VARCHAR},
+      CONTRACT_NO = #{contractNo,jdbcType=VARCHAR},
+      SIGNING_DATE = #{signingDate,jdbcType=TIMESTAMP},
+      INPUT_BY = #{inputBy,jdbcType=VARCHAR},
+      CHECK_BY = #{checkBy,jdbcType=VARCHAR},
+      INSPECTOR = #{inspector,jdbcType=VARCHAR},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      IMPORT_NUM = #{importNum,jdbcType=DECIMAL},
+      CREQUEST = #{crequest,jdbcType=VARCHAR},
+      CUSTOM_NAME = #{customName,jdbcType=VARCHAR},
+      DELIVERY_PERIOD = #{deliveryPeriod,jdbcType=TIMESTAMP},
+      SHIP_TIME = #{shipTime,jdbcType=TIMESTAMP},
+      TRADE_TERMS = #{tradeTerms,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      PRINT_STYLE = #{printStyle,jdbcType=CHAR},
+      OLD_STATE = #{oldState,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=DECIMAL},
+      OUT_STATE = #{outState,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where CONTRACT_ID = #{contractId,jdbcType=VARCHAR}
+  </update>
+</mapper>

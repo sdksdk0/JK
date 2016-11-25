@@ -1,7 +1,8 @@
-package cn.tf.jk.controller.basicfactory.factoryc;
+package cn.tf.jk.controller.basicinfo.factoryc;
 
 import java.util.List;
 
+import org.apache.ibatis.type.NStringTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +73,21 @@ public class FactoryController  extends BaseController {
 		model.addAttribute("obj",obj);
 		return "/basicinfo/factory/jFactoryView.jsp";
 	}
+	
+	//启用
+	@RequestMapping("/basicinfo/factory/start.action")
+	public String start(@RequestParam("factoryId") String[] factoryIds){
+		factoryCService.start(factoryIds);
+		return "redirect:/basicinfo/factory/list.action";
+	}
+	
+	//停用
+	@RequestMapping("/basicinfo/factory/stop.action")
+	public String stop(@RequestParam("factoryId") String[] factoryIds){
+		factoryCService.stop(factoryIds);
+		return "redirect:/basicinfo/factory/list.action";
+	}
+	
 	
 
 }

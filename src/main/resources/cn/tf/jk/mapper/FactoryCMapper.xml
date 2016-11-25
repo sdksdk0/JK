@@ -218,9 +218,17 @@
     
     <foreach collection="array"  item="factoryId"  open="("  close=")"  separator=",">
     	 #{factoryId,jdbcType=VARCHAR}
-    </foreach>
-    
+    </foreach>  
   </delete>
+  
+  <!-- 修改状态 -->
+  <update id="updateState"   parameterType="map">
+  		update factory_c  set state=#{state}
+  		 where factory_id in
+  		 <foreach collection="ids"  item="factoryId"  open="("  close=")"  separator=",">
+    	 #{factoryId,jdbcType=VARCHAR}
+    </foreach>  
+  </update>
   
   
 </mapper>
