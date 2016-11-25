@@ -36,8 +36,8 @@ public class FactoryCServiceImpl implements FactoryCService{
 
 	@Override
 	public FactoryC get(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return factoryCDao.get(id);
 	}
 
 	@Override
@@ -50,19 +50,19 @@ public class FactoryCServiceImpl implements FactoryCService{
 
 	@Override
 	public void update(FactoryC entity) {
-		// TODO Auto-generated method stub
+		factoryCDao.update(entity);
 		
 	}
 
 	@Override
 	public void deleteById(Serializable id) {
-		// TODO Auto-generated method stub
+		factoryCDao.deleteById(id);
 		
 	}
 
 	@Override
 	public void delete(Serializable[] ids) {
-		// TODO Auto-generated method stub
+		factoryCDao.delete(ids);
 		
 	}
 

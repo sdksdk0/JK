@@ -134,7 +134,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.tf.jk.po.FactoryC" >
+  <update id="update" parameterType="cn.tf.jk.po.FactoryC" >
     update FACTORY_C
     <set >
       <if test="fullName != null" >
@@ -200,6 +200,27 @@
   <select id="find"  parameterType="map"   resultMap="BaseResultMap">
   		select * from  factory_c
   </select>
+  
+  <select id="get"  parameterType="string"  resultMap="BaseResultMap">
+  		select * from factory_c 
+  		 where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 删除一条 -->
+   <delete id="deleteById" parameterType="java.lang.String" >
+    delete from FACTORY_C
+    where FACTORY_ID = #{factoryId,jdbcType=VARCHAR}
+  </delete>
+  <!-- 删除多条 -->
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from FACTORY_C
+    where FACTORY_ID   in 
+    
+    <foreach collection="array"  item="factoryId"  open="("  close=")"  separator=",">
+    	 #{factoryId,jdbcType=VARCHAR}
+    </foreach>
+    
+  </delete>
   
   
 </mapper>
