@@ -29,7 +29,7 @@
   		 <include refid="Base_Column_List" />
     from EXT_CPRODUCT_C
   where 1=1
-  <if test="extCproductId!=null">and EXT_CPRODUCT_ID=#{extCproductId}</if>
+  <if test="contractProductId!=null">and CONTRACT_PRODUCT_ID=#{contractProductId}</if>
   
   </select>
   
