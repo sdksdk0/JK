@@ -14,6 +14,7 @@ import cn.tf.jk.controller.BaseController;
 import cn.tf.jk.po.ContractC;
 import cn.tf.jk.po.ExtCproductC;
 import cn.tf.jk.po.FactoryC;
+import cn.tf.jk.po.SysCodeB;
 import cn.tf.jk.service.ContractCService;
 import cn.tf.jk.service.ExtCproductService;
 import cn.tf.jk.service.FactoryCService;
@@ -39,6 +40,12 @@ public class ExtCproductController extends  BaseController{
 			List<FactoryC>  factoryList=factoryCService.getFactoryList();
 			model.addAttribute("factoryList",factoryList);
 			
+			model.addAttribute("contractProductId",contractProductId);
+			
+			//分类下拉列表
+			List<SysCodeB> ctypeList = extCproductService.getCtypeList();
+			model.addAttribute("ctypeList",ctypeList);
+			
 			
 			return "/cargo/contract/jExtCproductCreate.jsp";
 		}
@@ -47,37 +54,44 @@ public class ExtCproductController extends  BaseController{
 		public String insert(ExtCproductC  extCproductC,Model model){
 			extCproductService.insert(extCproductC);
 			model.addAttribute("contractProductId",extCproductC.getContractProductId());
-			return "/cargo/extproduct/toCreate.action";
+			return "redirect:/cargo/extproduct/toCreate.action";
 		}
 	
-		/*//转向修改页面
-		@RequestMapping("/cargo/contract/toUpdate.action")
-		public  String toUpdate(String contractId,Model model){
-			ContractC obj = extCproductService.get(contractId);
+		//转向修改页面
+		@RequestMapping("/cargo/extproduct/toUpdate.action")
+		public  String toUpdate(String extCproductId,Model model){
+			ExtCproductC obj = extCproductService.get(extCproductId);
 			model.addAttribute("obj",obj);
-			return "/cargo/contract/jContractUpdate.jsp";
+			
+			
+			//生产厂家
+			List<FactoryC>  factoryList=factoryCService.getFactoryList();
+			model.addAttribute("factoryList",factoryList);
+			
+			
+			//分类下拉列表
+			List<SysCodeB> ctypeList = extCproductService.getCtypeList();
+			model.addAttribute("ctypeList",ctypeList);
+
+			return "/cargo/contract/jExtCproductUpdate.jsp";
 		}
 		
-		@RequestMapping("/cargo/contract/update.action")
-		public String update(ContractC contractC){
-			extCproductService.update(contractC);
-			return "redirect:/cargo/contract/list.action";
+		@RequestMapping("/cargo/extproduct/update.action")
+		public String update(ExtCproductC extCproductC,Model model){
+			extCproductService.update(extCproductC);
+			model.addAttribute("contractProductId",extCproductC.getContractProductId());
+			
+			return "redirect:/cargo/extproduct/toCreate.action";
 		}
 		
 		//删除多个
-		@RequestMapping("/cargo/contract/delete.action")
-		public String delete(@RequestParam("contractId") String[] contractIds){
-			extCproductService.delete(contractIds);
-			return "redirect:/cargo/contract/list.action";
+		@RequestMapping("/cargo/extproduct/delete.action")
+		public String delete(@RequestParam("extCproductId") String[] extCproductIds){
+			extCproductService.delete(extCproductIds);
+			return "redirect:/cargo/extproduct/toCreate.action";
 		}
 		
-		//查看
-		@RequestMapping("/cargo/contract/toView.action")
-		public String toview(String contractId,Model model){
-			ContractC obj = extCproductService.get(contractId);
-			model.addAttribute("obj",obj);
-			return "/cargo/contract/jContractView.jsp";
-		}*/
+
 		
 
 

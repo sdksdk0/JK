@@ -20,7 +20,7 @@
 
 <body>
 <form method="post">
-	<input  type="hidden"  name="contractId"  value="${contractId }" />
+	<input  type="hidden"  name="contractProductId"  value="${contractProductId }" />
 
 <div id="menubar">
 <div id="middleMenubar">
@@ -28,7 +28,6 @@
     <div id="navMenubar">
 <ul>
 <li id="save"><a href="#" onclick="formSubmit('insert.action','_self');">确定</a></li>
-<li id="back"><a href="${ctx }/cargo/contract/list.action">返回</a></li>
 </ul>
     </div>
 </div>
@@ -40,7 +39,7 @@
     <div class="textbox-header">
     <div class="textbox-inner-header">
     <div class="textbox-title">
-		新增货物信息
+		新增附件
     </div> 
     </div>
     </div>
@@ -66,19 +65,21 @@
 	            <td class="tableContent"><input type="text" name="productNo" /></td>
 	        </tr>
 	        <tr>  
-	        	<td class="columnTitle_mustbe">货物照片: </td>
-	            <td class="tableContent"><input type="text" name="productImage" /></td>
-	           
-	        </tr>
-	        <tr> 
-	           <td class="columnTitle_mustbe">数量：</td>
+	         	<td class="columnTitle_mustbe">数量：</td>
 	            <td class="tableContent"><input type="text" name="cnumber" /></td>
-	            <td class="columnTitle_mustbe">装率：</td>
-	            <td class="tableContent"><input type="text" name="loadingRate" /></td>
+	        	<td class="columnTitle_mustbe">货物照片: </td>
+	            <td class="tableContent"><input type="text" name="productImage" /></td>   
 	        </tr>
 	        <tr>    
-	            <td class="columnTitle_mustbe">箱数：</td>
-	            <td class="tableContent"><input type="text" name="boxNum" /></td>
+	             <td class="columnTitle_mustbe">分类：</td>
+	            <td class="tableContent">
+	            <select  name="ctype"  >
+	            	<option value="" >--请选择--</option>
+	            		<c:forEach  items="${ctypeList }"  var="cl">
+	            			<option  value="${cl.orderNo }">${cl.name}</option>
+	            		</c:forEach>
+	            	</select>
+	            </td>
 	            <td class="columnTitle_mustbe">包装单位：</td>
 	            <td class="tableContent"><input type="text" name="packingUnit" /></td>
 	        </tr>
@@ -92,6 +93,8 @@
 	         <tr>     
 	            <td class="columnTitle_mustbe">货物描述：</td>
 	            <td class="tableContent"><textarea  name="productDesc"  style="height:120px;"></textarea></td>
+	         	 <td class="columnTitle_mustbe">要求：</td>
+	            <td class="tableContent"><textarea  name="productRequest"  style="height:120px;"></textarea></td>
 	         </tr>
 		</table>
 	</div>
@@ -120,8 +123,6 @@
 		<td class="tableHeader">货号</td>
 		<td class="tableHeader">数量</td>
 		<td class="tableHeader">包装单位</td>
-		<td class="tableHeader">装率</td>
-		<td class="tableHeader">箱数</td>
 		<td class="tableHeader">单价</td>
 		<td class="tableHeader">总金额</td>
 		<td class="tableHeader">操作</td>
@@ -137,15 +138,12 @@
 		<td>${o.productNo}</td>
 		<td>${o.cnumber}</td>
 		<td>${o.packingUnit}</td>
-		<td>${o.loadingRate}</td>
-		<td>${o.boxNum}</td>
 		<td>${o.price}</td>
 		<td>${o.amount}</td>
 		<td>
-			<a href="toUpdate.action?contractProductId=${o.contractProductId }">[修改]</a>
-			<a href="delete.action?contractProductId=${o.contractProductId }">[删除]</a>
-			<a href="${ctx }/cargo/extproduct/toCreate.action?contractProductId=${o.contractProductId }">[附件]</a>
-		
+			<a href="toUpdate.action?extCproductId=${o.extCproductId }">[修改]</a>
+			<a href="delete.action?extCproductId=${o.extCproductId }">[删除]</a>
+			
 		</td>
 	</tr>
 	</c:forEach>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.SysCodeBMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.SysCodeB" >
+    <id column="SYS_CODE_ID" property="sysCodeId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="PARENT_NAME" property="parentName" jdbcType="VARCHAR" />
+    <result column="LAYER_NUM" property="layerNum" jdbcType="DECIMAL" />
+    <result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
+    <result column="QUOTE_NUM" property="quoteNum" jdbcType="DECIMAL" />
+    <result column="CNOTE" property="cnote" jdbcType="VARCHAR" />
+    <result column="ICO" property="ico" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="CHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_BY" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="UPDATED_TIME" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SYS_CODE_ID, NAME, PARENT_ID, PARENT_NAME, LAYER_NUM, IS_LEAF, QUOTE_NUM, CNOTE, 
+    ICO, ORDER_NO, STATE, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+  </sql>
+  
+  
+  <select  id="find"  parameterType="map"  resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from SYS_CODE_B
+    where  1=1
+    <if test="parentId!=null">  and PARENT_ID=#{parentId}</if>
+   
+  
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CODE_B
+    where SYS_CODE_ID = #{sysCodeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_CODE_B
+    where SYS_CODE_ID = #{sysCodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.SysCodeB" >
+    insert into SYS_CODE_B (SYS_CODE_ID, NAME, PARENT_ID, 
+      PARENT_NAME, LAYER_NUM, IS_LEAF, 
+      QUOTE_NUM, CNOTE, ICO, 
+      ORDER_NO, STATE, CREATED_BY, 
+      CREATED_TIME, UPDATED_BY, UPDATED_TIME
+      )
+    values (#{sysCodeId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{parentName,jdbcType=VARCHAR}, #{layerNum,jdbcType=DECIMAL}, #{isLeaf,jdbcType=DECIMAL}, 
+      #{quoteNum,jdbcType=DECIMAL}, #{cnote,jdbcType=VARCHAR}, #{ico,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=DECIMAL}, #{state,jdbcType=CHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.SysCodeB" >
+    insert into SYS_CODE_B
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysCodeId != null" >
+        SYS_CODE_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="parentName != null" >
+        PARENT_NAME,
+      </if>
+      <if test="layerNum != null" >
+        LAYER_NUM,
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF,
+      </if>
+      <if test="quoteNum != null" >
+        QUOTE_NUM,
+      </if>
+      <if test="cnote != null" >
+        CNOTE,
+      </if>
+      <if test="ico != null" >
+        ICO,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null" >
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysCodeId != null" >
+        #{sysCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null" >
+        #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="layerNum != null" >
+        #{layerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="quoteNum != null" >
+        #{quoteNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cnote != null" >
+        #{cnote,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.SysCodeB" >
+    update SYS_CODE_B
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null" >
+        PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="layerNum != null" >
+        LAYER_NUM = #{layerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="quoteNum != null" >
+        QUOTE_NUM = #{quoteNum,jdbcType=DECIMAL},
+      </if>
+      <if test="cnote != null" >
+        CNOTE = #{cnote,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        ICO = #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SYS_CODE_ID = #{sysCodeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.SysCodeB" >
+    update SYS_CODE_B
+    set NAME = #{name,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      LAYER_NUM = #{layerNum,jdbcType=DECIMAL},
+      IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      QUOTE_NUM = #{quoteNum,jdbcType=DECIMAL},
+      CNOTE = #{cnote,jdbcType=VARCHAR},
+      ICO = #{ico,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=CHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+    where SYS_CODE_ID = #{sysCodeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

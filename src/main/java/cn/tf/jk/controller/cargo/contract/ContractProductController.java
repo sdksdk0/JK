@@ -49,7 +49,7 @@ public class ContractProductController extends  BaseController{
 			contractProductCService.insert(contractProductC);
 			model.addAttribute("contractId",contractProductC.getContractId());
 			
-			return "/cargo/contractproduct/toCreate.action";
+			return "redirect:/cargo/contractproduct/toCreate.action";
 		}
 		
 		

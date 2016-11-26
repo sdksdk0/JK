@@ -7,6 +7,7 @@ import java.util.Map;
 import cn.tf.jk.pagination.Page;
 import cn.tf.jk.po.ExtCproductC;
 import cn.tf.jk.po.ExtCproductC;
+import cn.tf.jk.po.SysCodeB;
 
 public interface ExtCproductService {
 	
@@ -18,6 +19,8 @@ public interface ExtCproductService {
 	public void deleteById(Serializable id);		//按id删除，删除一条；支持整数型和字符串类型ID
 	public void delete(Serializable[] ids);	
 	
+	//获取分类列表
+	public List<SysCodeB> getCtypeList();
 	
 
 }

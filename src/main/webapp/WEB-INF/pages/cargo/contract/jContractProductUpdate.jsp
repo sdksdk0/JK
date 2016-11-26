@@ -92,7 +92,7 @@
 	         </tr>
 	         <tr>     
 	            <td class="columnTitle_mustbe">货物描述：</td>
-	            <td class="tableContent"> <td class="tableContent"><textarea  name="productDesc"  style="height:120px;">${obj.productDesc }</textarea></td>
+	            <td class="tableContent"><textarea  name="productDesc"  style="height:120px;">${obj.productDesc }</textarea></td>
 	         </tr>
 		</table>
 	</div>
