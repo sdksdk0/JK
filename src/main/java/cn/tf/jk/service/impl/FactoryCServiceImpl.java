@@ -83,9 +83,15 @@ public class FactoryCServiceImpl implements FactoryCService{
 		Map map=new HashMap<>();
 		map.put("state", 0);  //停用
 		map.put("ids", ids);
-		
 		factoryCDao.updateState(map);
 		
+	}
+
+	@Override
+	public List<FactoryC> getFactoryList() {
+		Map<String,Object> paraMap=new HashMap<String,Object>();
+		paraMap.put("state", 1); //只查询启用的生产厂家
+		return factoryCDao.find(paraMap);
 	}
 
 }

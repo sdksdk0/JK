@@ -22,5 +22,8 @@ public interface FactoryCService {
 	
 	//停用
 	public void stop(Serializable[] ids);
+	
+	//获取生产厂家的下拉列表，默认state为1
+	public List<FactoryC>  getFactoryList();
 
 }
