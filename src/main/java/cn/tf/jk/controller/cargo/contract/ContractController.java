@@ -12,6 +12,7 @@ import cn.tf.jk.controller.BaseController;
 import cn.tf.jk.po.ContractC;
 import cn.tf.jk.po.FactoryC;
 import cn.tf.jk.service.ContractCService;
+import cn.tf.jk.vo.ContractVO;
 
 @Controller
 public class ContractController extends  BaseController{
@@ -63,7 +64,7 @@ public class ContractController extends  BaseController{
 		//查看
 		@RequestMapping("/cargo/contract/toView.action")
 		public String toview(String contractId,Model model){
-			ContractC obj = contractCService.get(contractId);
+			ContractVO obj = contractCService.view(contractId);
 			model.addAttribute("obj",obj);
 			return "/cargo/contract/jContractView.jsp";
 		}

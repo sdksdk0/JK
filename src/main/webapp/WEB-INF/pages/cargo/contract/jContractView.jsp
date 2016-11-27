@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../baselist.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -68,6 +68,69 @@
 	</div>
 </div>
  
+ 
+  <div class="textbox" id="centerTextbox">
+  <div class="textbox-header">
+  <div class="textbox-inner-header">
+  <div class="textbox-title">
+
+    货物列表
+  </div> 
+  </div>
+  </div>
+  
+<div>
+ <div class="eXtremeTable" >
+<table id="ec_table" class="tableRegion" width="98%" >
+	<thead>
+	<tr>
+		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
+		<td class="tableHeader">序号</td>
+		<td class="tableHeader">厂家名称</td>
+		<td class="tableHeader">货号</td>
+		<td class="tableHeader">数量</td>
+		<td class="tableHeader">包装单位</td>
+		<td class="tableHeader">单价</td>
+		<td class="tableHeader">总金额</td>
+		
+	</tr>
+	</thead>
+	<tbody class="tableBody" >
+	
+	<c:forEach items="${obj.contractProductCs}" var="cp" varStatus="status">
+	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
+		<td>${status.index+1}</td>
+		<td>${cp.factoryC.factoryName}</td>
+		<td>${cp.productNo}</td>
+		<td>${cp.cnumber}</td>
+		<td>${cp.packingUnit}</td>
+		<td>${cp.price}</td>
+		<td>${cp.amount}</td>
+		
+	</tr>
+	
+	<c:forEach items="${cp.extCproductCs}" var="ext"  varStatus="status">
+	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
+		<td><font color="blue">附件:${status.index+1}</font></td>
+		<td>${ext.factoryC.factoryName}</td>
+		<td>${ext.productNo}</td>
+		<td>${ext.cnumber}</td>
+		<td>${ext.packingUnit}</td>
+		<td>${ext.price}</td>
+		<td>${ext.amount}</td>
+		
+	</tr>
+	</c:forEach>
+	
+	
+	
+	
+	</c:forEach>
+	
+	</tbody>
+</table>
+</div>
+</div>
  
 </form>
 </body>

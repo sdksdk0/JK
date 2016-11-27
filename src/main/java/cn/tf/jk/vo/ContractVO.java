@@ -1,10 +1,18 @@
-package cn.tf.jk.po;
+package cn.tf.jk.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-public class ContractC {
-    private String contractId;
+import cn.tf.jk.po.ContractProductC;
+
+public class ContractVO {
+	
+	private String contractId;
+
+	//货物的集合
+	private List<ContractProductC>  contractProductCs;
+
     
     private String cpnum;
     private String extnum;
@@ -55,7 +63,15 @@ public class ContractC {
     
     
 
-    public String getCpnum() {
+    public List<ContractProductC> getContractProductCs() {
+		return contractProductCs;
+	}
+
+	public void setContractProductCs(List<ContractProductC> contractProductCs) {
+		this.contractProductCs = contractProductCs;
+	}
+
+	public String getCpnum() {
 		return cpnum;
 	}
 
@@ -246,4 +262,5 @@ public class ContractC {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
 }

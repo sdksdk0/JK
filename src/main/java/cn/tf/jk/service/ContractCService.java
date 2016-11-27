@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.tf.jk.pagination.Page;
 import cn.tf.jk.po.ContractC;
+import cn.tf.jk.vo.ContractVO;
 
 public interface ContractCService {
 	
@@ -22,5 +23,9 @@ public interface ContractCService {
 	
 	//取消
 	public void cancel(Serializable[] ids);
+	
+	
+	//查询合同明细
+	public ContractVO  view(String contractId);
 
 }

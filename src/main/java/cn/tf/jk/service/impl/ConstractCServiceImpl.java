@@ -18,6 +18,7 @@ import cn.tf.jk.po.ContractC;
 import cn.tf.jk.po.FactoryC;
 import cn.tf.jk.service.ContractCService;
 import cn.tf.jk.service.FactoryCService;
+import cn.tf.jk.vo.ContractVO;
 
 @Service
 public class ConstractCServiceImpl implements ContractCService{
@@ -97,6 +98,12 @@ public class ConstractCServiceImpl implements ContractCService{
 		map.put("state", 0);  //取消
 		map.put("ids", ids);
 		contractCDao.updateState(map);
+	}
+
+	@Override
+	public ContractVO view(String contractId) {
+		
+		return contractCDao.view(contractId);
 	}
 
 	

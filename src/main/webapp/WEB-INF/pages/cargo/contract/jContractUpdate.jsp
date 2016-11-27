@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+     <script type="text/javascript" src="${ctx }/js/datepicker/WdatePicker.js"></script>
 </head>
 <body>
 <form method="post">
@@ -55,15 +56,16 @@
 	            <td class="tableContent"><input type="text" name="inspector" value="${obj.inspector }"/></td>
 	            <td class="columnTitle_mustbe">签单日期：</td>
 	            <td class="tableContent"><input type="text" name="signingDate" value="<fmt:formatDate value="${obj.signingDate }"  pattern="yyyy-MM-dd" />"
-	            
 	            		onclick="WdatePicker({el:this,isShowOthers:true,dateFmt:'yyyy-MM-dd'});"
 	            /></td>
 	        </tr>
 	        <tr>    
 	            <td class="columnTitle_mustbe">交货期限：</td>
-	            <td class="tableContent"><input type="text" name="deliveryPeriod"  value="<fmt:formatDate value="${obj.deliveryPeriod }"  pattern="yyyy-MM-dd" />" /></td>
+	            <td class="tableContent"><input type="text" name="deliveryPeriod"  value="<fmt:formatDate value="${obj.deliveryPeriod }"  pattern="yyyy-MM-dd" />" 
+	            onclick="WdatePicker({el:this,isShowOthers:true,dateFmt:'yyyy-MM-dd'});"/> </td>
 	            <td class="columnTitle_mustbe">船期：</td>
-	            <td class="tableContent"><input type="text" name="shipTime" value="<fmt:formatDate value="${obj.shipTime }"  pattern="yyyy-MM-dd" />"  /></td>
+	            <td class="tableContent"><input type="text" name="shipTime" value="<fmt:formatDate value="${obj.shipTime }"  pattern="yyyy-MM-dd" />"
+	            onclick="WdatePicker({el:this,isShowOthers:true,dateFmt:'yyyy-MM-dd'});"  /></td>
 	        </tr>
 	        <tr>     
 	            <td class="columnTitle_mustbe">总金额：</td>
