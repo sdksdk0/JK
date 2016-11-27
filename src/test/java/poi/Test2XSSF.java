@@ -34,6 +34,43 @@ public class Test2XSSF {
 		
 	}
 	
+	//百万数据测试
+	@Test	
+	public void test() throws Exception{
+		String xlsFile = "D:/clroleprice.xlsx";
+		
+		//STEP 1:打开excel文件
+		Workbook wb = new XSSFWorkbook();									//创建excel文件
+		//Workbook wb = new XSSFWorkbook(new FileInputStream(xlsFile));		//打开已存在的excel文件
+
+		//STEP 2:打开当前工作簿
+		Sheet sheet = wb.createSheet("我的第一个工作簿");		//建立新的sheet对象
+		//Sheet sheet = wb.getSheetAt(0);						//选择第一个工作簿
+		//wb.setSheetName(0, "我的第一个工作簿");					//设置工作簿的名称
+
+		Row nRow = null;
+		Cell nCell   = null;
+		
+		for(int i=0;i<1000000;i++){
+			System.out.println(i);
+			nRow = sheet.createRow(i);	
+			
+			for(int j=0;j<20;j++){
+				nCell = nRow.createCell(j);					//第3列
+				nCell.setCellValue("我是单元格");
+			}
+		}
+
+		//STEP 6:设置样式
+		nCell.setCellStyle(leftStyle(wb));
+
+		//STEP 7:关闭保存excel文件
+		FileOutputStream fOut = new FileOutputStream(xlsFile);
+		wb.write(fOut);
+		fOut.flush();
+		fOut.close();
+
+	}	
 	
 	/*
 	 * dom4j-1.6.1.jar
@@ -66,7 +103,7 @@ public class Test2XSSF {
 		nCell = nRow.createCell((short)(2));					//第3列
 		
 		//STEP 5:指定列 创建单元格对象
-		nCell.setCellValue("我是单元格传智播客");
+		nCell.setCellValue("我是单元格");
 		
 		//STEP 6:设置样式
 		nCell.setCellStyle(leftStyle(wb));

@@ -15,7 +15,7 @@
 <div id="innerMenubar">
     <div id="navMenubar">
 <ul>
-<li id="save"><a href="#" onclick="formSubmit('printTemple.action','_self');">打印</a></li>
+<li id="save"><a href="#" onclick="formSubmit('printXSSF.action','_self');">打印</a></li>
 
 </ul>
     </div>
