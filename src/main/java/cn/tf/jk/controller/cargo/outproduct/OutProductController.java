@@ -2,11 +2,14 @@ package cn.tf.jk.controller.cargo.outproduct;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -40,6 +43,123 @@ public class OutProductController extends BaseController{
 	public String toEdit(){
 		return "/cargo/outproduct/jOutProduct.jsp";
 	}
+	
+	//模板
+	@RequestMapping("/cargo/outproduct/printTemple.action")
+	public void printTemple(String inputDate,HttpServletRequest request,HttpServletResponse  response) throws IOException{
+		List<OutProductVO> dataList = outProductService.find(inputDate);
+		
+		//获取模板存放的路径
+		String path=request.getSession().getServletContext().getRealPath("/")+"/make/xlsprint/";
+		InputStream  is=new FileInputStream(new File(path+"出货表.xls"));
+		
+		
+		Workbook wb=new HSSFWorkbook(is);
+		Sheet sheet = wb.getSheetAt(0);
+		Row nRow=null;
+		Cell nCell=null;
+		
+		//行号
+		int  rowNo=0;
+		//列号
+		int colNo=1;
+		
+		//获取模板上的单元格样式
+		
+		nRow=sheet.getRow(2);
+		
+		//客户的样式
+		nCell=nRow.getCell(1);
+		CellStyle customStyle=nCell.getCellStyle();
+		//订单的样式
+		nCell=nRow.getCell(2);
+		CellStyle contractNoStyle=nCell.getCellStyle();
+		//货号的样式
+		nCell=nRow.getCell(3);
+		CellStyle productNoStyle=nCell.getCellStyle();
+		//数量的样式
+		nCell=nRow.getCell(4);
+		CellStyle numStyle=nCell.getCellStyle();
+		//生产厂家的样式
+		nCell=nRow.getCell(5);
+		CellStyle factoryStyle=nCell.getCellStyle();
+		//日期的样式
+		nCell=nRow.getCell(6);
+		CellStyle dateStyle=nCell.getCellStyle();
+		//贸易条款
+		nCell=nRow.getCell(8);
+		CellStyle tradeStyle=nCell.getCellStyle();
+		
+		
+		//大标题
+		nRow=sheet.getRow(rowNo++);  //获取一个行对象
+		nCell=nRow.getCell(colNo);  //获取一个单元格对象
+		nCell.setCellValue(inputDate.replace("-0", "年").replaceFirst("-", "年")+"月份出货表");
+		
+		//跳过静态表格头
+		rowNo++;
+
+		
+		//换行
+		for(int j=0;j<dataList.size();j++){
+			OutProductVO op=dataList.get(j);
+			colNo=1;
+			
+			nRow=sheet.createRow(rowNo++);
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getCustomName());
+			nCell.setCellStyle(customStyle);
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getContractNo());
+			nCell.setCellStyle(contractNoStyle);
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getProductNo());
+			nCell.setCellStyle(productNoStyle);
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getCnumber());
+			nCell.setCellStyle(numStyle);
+			
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getFactoryName());
+			nCell.setCellStyle(factoryStyle);
+			
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getDeliveryPeriod());
+			nCell.setCellStyle(dateStyle);
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getSpipTime());
+			nCell.setCellStyle(dateStyle);
+			
+			
+			nCell=nRow.createCell(colNo++);
+			nCell.setCellValue(op.getTradeTerms());
+			nCell.setCellStyle(tradeStyle);
+		}
+		
+		//下载
+		DownloadUtil dUtil=new DownloadUtil();
+		ByteArrayOutputStream os=new ByteArrayOutputStream();
+		wb.write(os);
+		dUtil.download(os, response, "出货表.xls");
+		os.flush();
+		os.close();
+	
+	}
+	
+	
 	@RequestMapping("/cargo/outproduct/print.action")
 	public void print(String inputDate,HttpServletResponse  response) throws IOException{
 		List<OutProductVO> dataList = outProductService.find(inputDate);
@@ -233,5 +353,11 @@ public class OutProductController extends BaseController{
 		nStyle.setFont(font);
 		return nStyle;
 	}
+	
+	
+	
+	
+	
+	
 
 }
