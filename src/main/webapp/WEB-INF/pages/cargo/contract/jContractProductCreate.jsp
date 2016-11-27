@@ -143,7 +143,7 @@
 		<td>${o.amount}</td>
 		<td>
 			<a href="toUpdate.action?contractProductId=${o.contractProductId }">[修改]</a>
-			<a href="delete.action?contractProductId=${o.contractProductId }">[删除]</a>
+			<a href="delete.action?contractProductId=${o.contractProductId }&contractId=${o.contractId}">[删除]</a>
 			<a href="${ctx }/cargo/extproduct/toCreate.action?contractProductId=${o.contractProductId }">[附件]</a>
 		
 		</td>

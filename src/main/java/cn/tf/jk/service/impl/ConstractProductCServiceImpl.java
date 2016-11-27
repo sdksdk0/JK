@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.tf.jk.dao.ContractProductCDao;
+import cn.tf.jk.dao.ExtCproductDao;
 
 import cn.tf.jk.pagination.Page;
 import cn.tf.jk.po.ContractProductC;
@@ -22,7 +23,8 @@ public class ConstractProductCServiceImpl implements ContractProductCService{
 
 	@Autowired
 	private ContractProductCDao  ContractProductCDao;
-	
+	@Autowired
+	private ExtCproductDao  extCproductDao;
 	
 	@Override
 	public List<ContractProductC> findPage(Page page) {
@@ -73,13 +75,21 @@ public class ConstractProductCServiceImpl implements ContractProductCService{
 
 	@Override
 	public void deleteById(Serializable id) {
+		Serializable[] ids={id};
+		//删除附件
+		extCproductDao.deleteByContractProduct(ids);
+		
 		ContractProductCDao.deleteById(id);
 		
 	}
 
 	@Override
 	public void delete(Serializable[] ids) {
+		//删除附件
+		extCproductDao.deleteByContractProduct(ids);
+		//删除自身的
 		ContractProductCDao.delete(ids);
+		
 		
 	}
 

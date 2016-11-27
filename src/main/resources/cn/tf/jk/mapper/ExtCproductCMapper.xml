@@ -55,9 +55,30 @@
   </delete>
   
   
+    <!-- 级联删除,删除货物下的附件 -->
+  <delete id="deleteByContractProduct" parameterType="java.lang.String" >
+    delete from EXT_CPRODUCT_C
+    where  CONTRACT_PRODUCT_ID   in 
   
+   <foreach collection="array"  item="contractProductId"  open="("  close=")"  separator=",">
+    	#{contractProductId,jdbcType=VARCHAR}
+    </foreach>  
+    )
+  </delete>
   
-  
+  <!-- 删除合同下的附件 -->
+    <delete id="deleteByContractId" parameterType="java.lang.String" >
+    delete from EXT_CPRODUCT_C
+    where  CONTRACT_PRODUCT_ID   in 
+    
+    (
+    	select CONTRACT_PRODUCT_ID from contract_product_c
+    	where contract_id in
+    	<foreach collection="array"  item="contractProductId"  open="("  close=")"  separator=",">
+    	#{contractProductId,jdbcType=VARCHAR}
+    </foreach>  
+    )
+  </delete>
   
   
   

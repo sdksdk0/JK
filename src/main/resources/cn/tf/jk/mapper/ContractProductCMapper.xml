@@ -57,8 +57,16 @@
     </foreach>  
   </delete>
   
-
-  
+	<!-- 级联删除 -->
+    <delete id="deleteByContractId"  parameterType="java.lang.String">
+    	delete from CONTRACT_PRODUCT_C
+    where  CONTRACT_ID   in 
+    <foreach collection="array"  item="contractId"  open="("  close=")"  separator=",">
+    	 #{contractId,jdbcType=VARCHAR}
+    </foreach>  
+    
+    
+    </delete>
   
   
   

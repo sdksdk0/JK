@@ -1,5 +1,6 @@
 package cn.tf.jk.dao.impl;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,13 @@ public class ContractProductCDaolmpl extends BaseDaoImpl<ContractProductC>  impl
 	public ContractProductCDaolmpl(){
 		super.setNs("cn.tf.jk.mapper.ContractProductCMapper");
 	}
+
+	@Override
+	public void deleteByContractId(Serializable[] ids) {
+		super.getSqlSession().delete(super.getNs()+".deleteByContractId",ids);
+		
+	}
+	
 
 
 	

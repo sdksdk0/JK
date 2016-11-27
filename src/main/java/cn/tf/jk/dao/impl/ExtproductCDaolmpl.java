@@ -1,5 +1,6 @@
 package cn.tf.jk.dao.impl;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,16 @@ public class ExtproductCDaolmpl extends BaseDaoImpl<ExtCproductC>  implements  E
 		super.setNs("cn.tf.jk.mapper.ExtCproductCMapper");
 	}
 
-
+	@Override
+	public void deleteByContractProduct(Serializable[] ids) {
+		super.getSqlSession().delete(super.getNs()+".deleteByContractProduct",ids);
+		
+	}
 	
-	
+	@Override
+	public void deleteByContractId(Serializable[] contractIds) {
+		super.getSqlSession().delete(super.getNs()+".deleteByContractId",contractIds);
+		
+	}
 	
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.tf.jk.dao.ContractCDao;
+import cn.tf.jk.dao.ContractProductCDao;
+import cn.tf.jk.dao.ExtCproductDao;
 import cn.tf.jk.dao.FactoryCDao;
 import cn.tf.jk.pagination.Page;
 import cn.tf.jk.po.ContractC;
@@ -22,6 +24,10 @@ public class ConstractCServiceImpl implements ContractCService{
 
 	@Autowired
 	private ContractCDao  contractCDao;
+	@Autowired
+	private ContractProductCDao  contractProductCDao;
+	@Autowired
+	private ExtCproductDao extCproductDao;
 	
 	
 	@Override
@@ -59,12 +65,19 @@ public class ConstractCServiceImpl implements ContractCService{
 
 	@Override
 	public void deleteById(Serializable id) {
+		Serializable[] ids={id};
+		
+		extCproductDao.deleteByContractId(ids);
+		contractProductCDao.deleteByContractId(ids);
+		
 		contractCDao.deleteById(id);
 		
 	}
 
 	@Override
 	public void delete(Serializable[] ids) {
+		extCproductDao.deleteByContractId(ids);
+		contractProductCDao.deleteByContractId(ids);
 		contractCDao.delete(ids);
 		
 	}

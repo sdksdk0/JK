@@ -18,5 +18,4 @@ public interface ContractProductCService {
 	public void delete(Serializable[] ids);	
 	
 
-
 }

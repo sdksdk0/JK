@@ -73,10 +73,12 @@ public class ContractProductController extends  BaseController{
 			return "redirect:/cargo/contractproduct/toCreate.action";
 		}
 		
-		//删除多个
+		//删除
 		@RequestMapping("/cargo/contractproduct/delete.action")
-		public String delete(@RequestParam("contractProductId") String[] contractProductIds){
-			contractProductCService.delete(contractProductIds);
+		public String delete( String contractProductId,String contractId,Model model){
+			contractProductCService.deleteById(contractProductId);
+			model.addAttribute("contractId",contractId);
+			
 			return "redirect:/cargo/contractproduct/toCreate.action";
 		}
 		
