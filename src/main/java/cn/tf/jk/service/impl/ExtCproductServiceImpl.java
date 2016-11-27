@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import cn.tf.jk.dao.ExtCproductDao;
 import cn.tf.jk.dao.ExtCproductDao;
 import cn.tf.jk.dao.SysCodeDao;
@@ -18,6 +19,7 @@ import cn.tf.jk.po.SysCodeB;
 import cn.tf.jk.service.ExtCproductService;
 import cn.tf.jk.service.ExtCproductService;
 import cn.tf.jk.util.UtilFuns;
+
 
 @Service
 public class ExtCproductServiceImpl implements ExtCproductService{

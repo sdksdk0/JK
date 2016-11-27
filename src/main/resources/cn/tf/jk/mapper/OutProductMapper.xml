@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.OutProductMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.vo.OutProductVO" >
+  	<result column="CUSTOM_NAME" property="customName" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NO" property="contractNo" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NO" property="productNo" jdbcType="VARCHAR" />
+    <result column="CNUMBER" property="cnumber" jdbcType="VARCHAR" />
+    <result column="FACTORY_NAME" property="factoryName" jdbcType="VARCHAR" />
+    
+    <result column="EXTS" property="exts" jdbcType="VARCHAR" />
+    <result column="DELIVERY_PERIOD" property="deliveryPeriod" jdbcType="VARCHAR" />
+    <result column="SHIP_TIME" property="spipTime" jdbcType="VARCHAR" />
+    <result column="TRADE_TERMS" property="tradeTerms" jdbcType="VARCHAR" />
+   </resultMap>
+  
+  
+  
+    
+  <select id="find"  parameterType="string"  resultMap="BaseResultMap">
+  		select
+  c.custom_name,c.contract_no,
+  to_char(c.delivery_period,'yyyy-MM-dd') as delivery_period,
+  to_char(c.ship_time,'yyyy-MM-dd') as ship_time,
+  c.trade_terms,
+cp.product_no,concat(cp.cnumber,cp.packing_unit) as cnumber,cp.factory_name
+from
+(select contract_id,custom_name,contract_no,delivery_period,ship_time,trade_terms from contract_c) c
+left join
+(select contract_id,product_no,cnumber,packing_unit,factory_name from contract_product_c) cp
+on c.contract_id=cp.contract_id
+
+where to_char(ship_time,'yyyy-MM')= #{inputDate}
+
+  		
+  
+  </select>
+  
+  
+  
+  </mapper>

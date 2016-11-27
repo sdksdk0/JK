@@ -26,6 +26,12 @@
     FINISHED, EXTS, ORDER_NO
   </sql>
   
+  
+
+  
+  
+  
+  
   <!-- 查询某个合同下的货物信息 -->
   <select id="find"   resultMap="BaseResultMap" >
   		 select   
@@ -35,6 +41,8 @@
   <if test="contractId!=null">and CONTRACT_ID=#{contractId}</if>
   
   </select>
+
+  
   
   <select id="get"  parameterType="string"  resultMap="BaseResultMap">
   		select * from CONTRACT_PRODUCT_C
