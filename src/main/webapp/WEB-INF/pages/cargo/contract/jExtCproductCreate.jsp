@@ -115,7 +115,7 @@
 <table id="ec_table" class="tableRegion" width="98%" >
 	<thead>
 	<tr>
-		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
+		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('contractProductId',this)"></td>
 		<td class="tableHeader">序号</td>
 		<td class="tableHeader">厂家名称</td>
 		<td class="tableHeader">货号</td>

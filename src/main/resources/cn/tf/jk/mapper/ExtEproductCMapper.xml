@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.ExtEproductCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.ExtEproductC" >
+    <id column="EXT_EPRODUCT_ID" property="extEproductId" jdbcType="VARCHAR" />
+    <result column="EXPORT_PRODUCT_ID" property="exportProductId" jdbcType="VARCHAR" />
+    <result column="FACTORY_ID" property="factoryId" jdbcType="VARCHAR" />
+    <result column="FACTORY_NAME" property="factoryName" jdbcType="VARCHAR" />
+    <result column="CTYPE" property="ctype" jdbcType="DECIMAL" />
+    <result column="PRODUCT_NO" property="productNo" jdbcType="VARCHAR" />
+    <result column="PRODUCT_IMAGE" property="productImage" jdbcType="VARCHAR" />
+    <result column="PRODUCT_DESC" property="productDesc" jdbcType="VARCHAR" />
+    <result column="CNUMBER" property="cnumber" jdbcType="DECIMAL" />
+    <result column="PACKING_UNIT" property="packingUnit" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="PRODUCT_REQUEST" property="productRequest" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXT_EPRODUCT_ID, EXPORT_PRODUCT_ID, FACTORY_ID, FACTORY_NAME, CTYPE, PRODUCT_NO, 
+    PRODUCT_IMAGE, PRODUCT_DESC, CNUMBER, PACKING_UNIT, PRICE, AMOUNT, PRODUCT_REQUEST, 
+    ORDER_NO
+  </sql>
+  
+  <!-- 查询某个货物下的附件信息 -->
+	<select id="find" parameterType="map" resultMap="BaseResultMap">
+		select * from ext_eproduct_c
+		where 1=1
+		<if test="exportProductId != null"> and EXPORT_PRODUCT_ID=#{exportProductId}</if>
+	</select>
+	
+	<select id="get" parameterType="string" resultMap="BaseResultMap">
+		select * from ext_eproduct_c
+		where ext_eproduct_id=#{pid}
+	</select>
+  <!-- 删除一条 -->
+	<delete id="deleteById" parameterType="string">
+		delete from ext_eproduct_c
+		where EXT_EPRODUCT_ID=#{pid}
+	</delete>
+	
+	<!-- 删除多条（一维字符串数组） -->
+	<delete id="delete" parameterType="string">
+		delete from ext_eproduct_c
+		where EXT_EPRODUCT_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from EXT_EPRODUCT_C
+    where EXT_EPRODUCT_ID = #{extEproductId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EXT_EPRODUCT_C
+    where EXT_EPRODUCT_ID = #{extEproductId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.ExtEproductC" >
+    insert into EXT_EPRODUCT_C (EXT_EPRODUCT_ID, EXPORT_PRODUCT_ID, FACTORY_ID, 
+      FACTORY_NAME, CTYPE, PRODUCT_NO, 
+      PRODUCT_IMAGE, PRODUCT_DESC, CNUMBER, 
+      PACKING_UNIT, PRICE, AMOUNT, 
+      PRODUCT_REQUEST, ORDER_NO)
+    values (#{extEproductId,jdbcType=VARCHAR}, #{exportProductId,jdbcType=VARCHAR}, #{factoryId,jdbcType=VARCHAR}, 
+      #{factoryName,jdbcType=VARCHAR}, #{ctype,jdbcType=DECIMAL}, #{productNo,jdbcType=VARCHAR}, 
+      #{productImage,jdbcType=VARCHAR}, #{productDesc,jdbcType=VARCHAR}, #{cnumber,jdbcType=DECIMAL}, 
+      #{packingUnit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{productRequest,jdbcType=VARCHAR}, #{orderNo,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.ExtEproductC" >
+    insert into EXT_EPRODUCT_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="extEproductId != null" >
+        EXT_EPRODUCT_ID,
+      </if>
+      <if test="exportProductId != null" >
+        EXPORT_PRODUCT_ID,
+      </if>
+      <if test="factoryId != null" >
+        FACTORY_ID,
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME,
+      </if>
+      <if test="ctype != null" >
+        CTYPE,
+      </if>
+      <if test="productNo != null" >
+        PRODUCT_NO,
+      </if>
+      <if test="productImage != null" >
+        PRODUCT_IMAGE,
+      </if>
+      <if test="productDesc != null" >
+        PRODUCT_DESC,
+      </if>
+      <if test="cnumber != null" >
+        CNUMBER,
+      </if>
+      <if test="packingUnit != null" >
+        PACKING_UNIT,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="productRequest != null" >
+        PRODUCT_REQUEST,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="extEproductId != null" >
+        #{extEproductId,jdbcType=VARCHAR},
+      </if>
+      <if test="exportProductId != null" >
+        #{exportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        #{ctype,jdbcType=DECIMAL},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productDesc != null" >
+        #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cnumber != null" >
+        #{cnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="packingUnit != null" >
+        #{packingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="productRequest != null" >
+        #{productRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.ExtEproductC" >
+    update EXT_EPRODUCT_C
+    <set >
+      <if test="exportProductId != null" >
+        EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        FACTORY_ID = #{factoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        CTYPE = #{ctype,jdbcType=DECIMAL},
+      </if>
+      <if test="productNo != null" >
+        PRODUCT_NO = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        PRODUCT_IMAGE = #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productDesc != null" >
+        PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cnumber != null" >
+        CNUMBER = #{cnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="packingUnit != null" >
+        PACKING_UNIT = #{packingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="productRequest != null" >
+        PRODUCT_REQUEST = #{productRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where EXT_EPRODUCT_ID = #{extEproductId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.ExtEproductC" >
+    update EXT_EPRODUCT_C
+    set EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR},
+      FACTORY_ID = #{factoryId,jdbcType=VARCHAR},
+      FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      CTYPE = #{ctype,jdbcType=DECIMAL},
+      PRODUCT_NO = #{productNo,jdbcType=VARCHAR},
+      PRODUCT_IMAGE = #{productImage,jdbcType=VARCHAR},
+      PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
+      CNUMBER = #{cnumber,jdbcType=DECIMAL},
+      PACKING_UNIT = #{packingUnit,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      PRODUCT_REQUEST = #{productRequest,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+    where EXT_EPRODUCT_ID = #{extEproductId,jdbcType=VARCHAR}
+  </update>
+</mapper>

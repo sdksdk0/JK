@@ -54,7 +54,7 @@
 <table id="ec_table" class="tableRegion" width="98%" >
 	<thead>
 	<tr>
-		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
+		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('factoryId',this)"></td>
 		<td class="tableHeader">序号</td>
 		<td class="tableHeader">厂家全称</td>
 		<td class="tableHeader">联系人</td>

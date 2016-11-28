@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.ExportCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.ExportC" >
+    <id column="EXPORT_ID" property="exportId" jdbcType="VARCHAR" />
+    
+    <!-- 虚拟字段 -->
+     <result column="CPNUM" property="cpnum" jdbcType="VARCHAR" />
+    <result column="EXTNUM" property="extnum" jdbcType="VARCHAR" />
+    
+
+    
+    <result column="INPUT_DATE" property="inputDate" jdbcType="TIMESTAMP" />
+    <result column="CONTRACT_IDS" property="contractIds" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_CONTRACT" property="customerContract" jdbcType="VARCHAR" />
+    <result column="LCNO" property="lcno" jdbcType="VARCHAR" />
+    <result column="CONSIGNEE" property="consignee" jdbcType="VARCHAR" />
+    <result column="MARKS" property="marks" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="SHIPMENT_PORT" property="shipmentPort" jdbcType="VARCHAR" />
+    <result column="DESTINATION_PORT" property="destinationPort" jdbcType="VARCHAR" />
+    <result column="TRANSPORT_MODE" property="transportMode" jdbcType="VARCHAR" />
+    <result column="PRICE_CONDITION" property="priceCondition" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="GROSS_WEIGHT" property="grossWeight" jdbcType="DECIMAL" />
+    <result column="NET_WEIGHT" property="netWeight" jdbcType="DECIMAL" />
+    <result column="MEASUREMENT" property="measurement" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DEPT" property="createDept" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXPORT_ID, INPUT_DATE, CONTRACT_IDS, CUSTOMER_CONTRACT, LCNO, CONSIGNEE, MARKS, REMARK, 
+    SHIPMENT_PORT, DESTINATION_PORT, TRANSPORT_MODE, PRICE_CONDITION, STATE, GROSS_WEIGHT, 
+    NET_WEIGHT, MEASUREMENT, CREATE_BY, CREATE_DEPT, CREATE_TIME
+  </sql>
+  
+  <select id="find"  parameterType="map"  resultMap="BaseResultMap">
+  
+  	select 
+  (select count(*) from export_product_c
+  where export_id=e.export_id)  as epnum,
+  (select count(*) from ext_eproduct_c
+          where export_product_id in (select export_product_id from export_product_c where export_id=e.export_id)
+      ) as extnum,
+
+e.export_id,e.input_date,e.contract_ids,e.customer_contract,e.lcno,e.consignee,e.marks,e.remark,e.shipment_port,e.destination_port,e.transport_mode,e.price_condition,e.gross_weight,e.net_weight,e.measurement,e.state
+from export_c e
+  </select>
+  
+  
+  <select id="get" parameterType="string" resultMap="BaseResultMap">
+		select * from export_c
+		where export_id=#{pid}
+	</select>
+	
+	<!-- 删除一条 -->
+	<delete id="deleteById" parameterType="string">
+		delete from export_c
+		where export_id=#{pid}
+	</delete>
+	
+	<!-- 删除多条（一维字符串数组） -->
+	<delete id="delete" parameterType="string">
+		delete from export_c
+		where export_id in
+		<foreach collection="array" item="exportId" open="(" close=")" separator=",">
+			#{exportId}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态 -->
+	<update id="updateState" parameterType="map">
+		update export_c set state=#{state}
+		where export_id in
+		<foreach collection="ids" item="exportId" open="(" close=")" separator=",">
+			#{exportId}
+		</foreach>
+	</update>
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from EXPORT_C
+    where EXPORT_ID = #{exportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EXPORT_C
+    where EXPORT_ID = #{exportId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.ExportC" >
+    insert into EXPORT_C (EXPORT_ID, INPUT_DATE, CONTRACT_IDS, 
+      CUSTOMER_CONTRACT, LCNO, CONSIGNEE, 
+      MARKS, REMARK, SHIPMENT_PORT, 
+      DESTINATION_PORT, TRANSPORT_MODE, PRICE_CONDITION, 
+      STATE, GROSS_WEIGHT, NET_WEIGHT, 
+      MEASUREMENT, CREATE_BY, CREATE_DEPT, 
+      CREATE_TIME)
+    values (#{exportId,jdbcType=VARCHAR}, #{inputDate,jdbcType=TIMESTAMP}, #{contractIds,jdbcType=VARCHAR}, 
+      #{customerContract,jdbcType=VARCHAR}, #{lcno,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, 
+      #{marks,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{shipmentPort,jdbcType=VARCHAR}, 
+      #{destinationPort,jdbcType=VARCHAR}, #{transportMode,jdbcType=VARCHAR}, #{priceCondition,jdbcType=VARCHAR}, 
+      0, #{grossWeight,jdbcType=DECIMAL}, #{netWeight,jdbcType=DECIMAL}, 
+      #{measurement,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, #{createDept,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.ExportC" >
+    insert into EXPORT_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exportId != null" >
+        EXPORT_ID,
+      </if>
+      <if test="inputDate != null" >
+        INPUT_DATE,
+      </if>
+      <if test="contractIds != null" >
+        CONTRACT_IDS,
+      </if>
+      <if test="customerContract != null" >
+        CUSTOMER_CONTRACT,
+      </if>
+      <if test="lcno != null" >
+        LCNO,
+      </if>
+      <if test="consignee != null" >
+        CONSIGNEE,
+      </if>
+      <if test="marks != null" >
+        MARKS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="shipmentPort != null" >
+        SHIPMENT_PORT,
+      </if>
+      <if test="destinationPort != null" >
+        DESTINATION_PORT,
+      </if>
+      <if test="transportMode != null" >
+        TRANSPORT_MODE,
+      </if>
+      <if test="priceCondition != null" >
+        PRICE_CONDITION,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="grossWeight != null" >
+        GROSS_WEIGHT,
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT,
+      </if>
+      <if test="measurement != null" >
+        MEASUREMENT,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exportId != null" >
+        #{exportId,jdbcType=VARCHAR},
+      </if>
+      <if test="inputDate != null" >
+        #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractIds != null" >
+        #{contractIds,jdbcType=VARCHAR},
+      </if>
+      <if test="customerContract != null" >
+        #{customerContract,jdbcType=VARCHAR},
+      </if>
+      <if test="lcno != null" >
+        #{lcno,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="marks != null" >
+        #{marks,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentPort != null" >
+        #{shipmentPort,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationPort != null" >
+        #{destinationPort,jdbcType=VARCHAR},
+      </if>
+      <if test="transportMode != null" >
+        #{transportMode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCondition != null" >
+        #{priceCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="grossWeight != null" >
+        #{grossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="netWeight != null" >
+        #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="measurement != null" >
+        #{measurement,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.ExportC" >
+    update EXPORT_C
+    <set >
+      <if test="inputDate != null" >
+        INPUT_DATE = #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractIds != null" >
+        CONTRACT_IDS = #{contractIds,jdbcType=VARCHAR},
+      </if>
+      <if test="customerContract != null" >
+        CUSTOMER_CONTRACT = #{customerContract,jdbcType=VARCHAR},
+      </if>
+      <if test="lcno != null" >
+        LCNO = #{lcno,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="marks != null" >
+        MARKS = #{marks,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentPort != null" >
+        SHIPMENT_PORT = #{shipmentPort,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationPort != null" >
+        DESTINATION_PORT = #{destinationPort,jdbcType=VARCHAR},
+      </if>
+      <if test="transportMode != null" >
+        TRANSPORT_MODE = #{transportMode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCondition != null" >
+        PRICE_CONDITION = #{priceCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="grossWeight != null" >
+        GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="measurement != null" >
+        MEASUREMENT = #{measurement,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EXPORT_ID = #{exportId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.ExportC" >
+    update EXPORT_C
+    set INPUT_DATE = #{inputDate,jdbcType=TIMESTAMP},
+      CONTRACT_IDS = #{contractIds,jdbcType=VARCHAR},
+      CUSTOMER_CONTRACT = #{customerContract,jdbcType=VARCHAR},
+      LCNO = #{lcno,jdbcType=VARCHAR},
+      CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      MARKS = #{marks,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      SHIPMENT_PORT = #{shipmentPort,jdbcType=VARCHAR},
+      DESTINATION_PORT = #{destinationPort,jdbcType=VARCHAR},
+      TRANSPORT_MODE = #{transportMode,jdbcType=VARCHAR},
+      PRICE_CONDITION = #{priceCondition,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=DECIMAL},
+      GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+      NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      MEASUREMENT = #{measurement,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where EXPORT_ID = #{exportId,jdbcType=VARCHAR}
+  </update>
+</mapper>

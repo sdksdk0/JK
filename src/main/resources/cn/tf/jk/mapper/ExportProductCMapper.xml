@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.ExportProductCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.ExportProductC" >
+    <id column="EXPORT_PRODUCT_ID" property="exportProductId" jdbcType="VARCHAR" />
+    <result column="EXPORT_ID" property="exportId" jdbcType="VARCHAR" />
+    <result column="FACTORY_ID" property="factoryId" jdbcType="VARCHAR" />
+    <result column="FACTORY_NAME" property="factoryName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NO" property="productNo" jdbcType="VARCHAR" />
+    <result column="PACKING_UNIT" property="packingUnit" jdbcType="VARCHAR" />
+    <result column="CNUMBER" property="cnumber" jdbcType="DECIMAL" />
+    <result column="BOX_NUM" property="boxNum" jdbcType="DECIMAL" />
+    <result column="GROSS_WEIGHT" property="grossWeight" jdbcType="DECIMAL" />
+    <result column="NET_WEIGHT" property="netWeight" jdbcType="DECIMAL" />
+    <result column="SIZE_LENGTH" property="sizeLength" jdbcType="DECIMAL" />
+    <result column="SIZE_WIDTH" property="sizeWidth" jdbcType="DECIMAL" />
+    <result column="SIZE_HEIGHT" property="sizeHeight" jdbcType="DECIMAL" />
+    <result column="EX_PRICE" property="exPrice" jdbcType="DECIMAL" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="TAX" property="tax" jdbcType="DECIMAL" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXPORT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, FACTORY_NAME, PRODUCT_NO, PACKING_UNIT, 
+    CNUMBER, BOX_NUM, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGTH, SIZE_WIDTH, SIZE_HEIGHT, 
+    EX_PRICE, PRICE, TAX, ORDER_NO
+  </sql>
+  
+  <select id="find"  parameterType="map"  resultMap="BaseResultMap">
+  		select * from export_product_c
+		where 1=1
+		<if test="exportId != null">and export_id=#{exportId}</if>
+
+  </select>
+  
+  <select id="get" parameterType="string" resultMap="BaseResultMap">
+		select * from export_product_c
+		where export_product_id=#{pid}
+	</select>
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from EXPORT_PRODUCT_C
+    where EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EXPORT_PRODUCT_C
+    where EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.ExportProductC" >
+    insert into EXPORT_PRODUCT_C (EXPORT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, 
+      FACTORY_NAME, PRODUCT_NO, PACKING_UNIT, 
+      CNUMBER, BOX_NUM, GROSS_WEIGHT, 
+      NET_WEIGHT, SIZE_LENGTH, SIZE_WIDTH, 
+      SIZE_HEIGHT, EX_PRICE, PRICE, 
+      TAX, ORDER_NO)
+    values (#{exportProductId,jdbcType=VARCHAR}, #{exportId,jdbcType=VARCHAR}, #{factoryId,jdbcType=VARCHAR}, 
+      #{factoryName,jdbcType=VARCHAR}, #{productNo,jdbcType=VARCHAR}, #{packingUnit,jdbcType=VARCHAR}, 
+      #{cnumber,jdbcType=DECIMAL}, #{boxNum,jdbcType=DECIMAL}, #{grossWeight,jdbcType=DECIMAL}, 
+      #{netWeight,jdbcType=DECIMAL}, #{sizeLength,jdbcType=DECIMAL}, #{sizeWidth,jdbcType=DECIMAL}, 
+      #{sizeHeight,jdbcType=DECIMAL}, #{exPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, 
+      #{tax,jdbcType=DECIMAL}, #{orderNo,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.ExportProductC" >
+    insert into EXPORT_PRODUCT_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exportProductId != null" >
+        EXPORT_PRODUCT_ID,
+      </if>
+      <if test="exportId != null" >
+        EXPORT_ID,
+      </if>
+      <if test="factoryId != null" >
+        FACTORY_ID,
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME,
+      </if>
+      <if test="productNo != null" >
+        PRODUCT_NO,
+      </if>
+      <if test="packingUnit != null" >
+        PACKING_UNIT,
+      </if>
+      <if test="cnumber != null" >
+        CNUMBER,
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM,
+      </if>
+      <if test="grossWeight != null" >
+        GROSS_WEIGHT,
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT,
+      </if>
+      <if test="sizeLength != null" >
+        SIZE_LENGTH,
+      </if>
+      <if test="sizeWidth != null" >
+        SIZE_WIDTH,
+      </if>
+      <if test="sizeHeight != null" >
+        SIZE_HEIGHT,
+      </if>
+      <if test="exPrice != null" >
+        EX_PRICE,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="tax != null" >
+        TAX,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exportProductId != null" >
+        #{exportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="exportId != null" >
+        #{exportId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="packingUnit != null" >
+        #{packingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="cnumber != null" >
+        #{cnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="boxNum != null" >
+        #{boxNum,jdbcType=DECIMAL},
+      </if>
+      <if test="grossWeight != null" >
+        #{grossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="netWeight != null" >
+        #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeLength != null" >
+        #{sizeLength,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeWidth != null" >
+        #{sizeWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeHeight != null" >
+        #{sizeHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="exPrice != null" >
+        #{exPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="tax != null" >
+        #{tax,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.ExportProductC" >
+    update EXPORT_PRODUCT_C
+    <set >
+      <if test="exportId != null" >
+        EXPORT_ID = #{exportId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        FACTORY_ID = #{factoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        PRODUCT_NO = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="packingUnit != null" >
+        PACKING_UNIT = #{packingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="cnumber != null" >
+        CNUMBER = #{cnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM = #{boxNum,jdbcType=DECIMAL},
+      </if>
+      <if test="grossWeight != null" >
+        GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeLength != null" >
+        SIZE_LENGTH = #{sizeLength,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeWidth != null" >
+        SIZE_WIDTH = #{sizeWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeHeight != null" >
+        SIZE_HEIGHT = #{sizeHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="exPrice != null" >
+        EX_PRICE = #{exPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="tax != null" >
+        TAX = #{tax,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.ExportProductC" >
+    update EXPORT_PRODUCT_C
+    set EXPORT_ID = #{exportId,jdbcType=VARCHAR},
+      FACTORY_ID = #{factoryId,jdbcType=VARCHAR},
+      FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      PRODUCT_NO = #{productNo,jdbcType=VARCHAR},
+      PACKING_UNIT = #{packingUnit,jdbcType=VARCHAR},
+      CNUMBER = #{cnumber,jdbcType=DECIMAL},
+      BOX_NUM = #{boxNum,jdbcType=DECIMAL},
+      GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+      NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      SIZE_LENGTH = #{sizeLength,jdbcType=DECIMAL},
+      SIZE_WIDTH = #{sizeWidth,jdbcType=DECIMAL},
+      SIZE_HEIGHT = #{sizeHeight,jdbcType=DECIMAL},
+      EX_PRICE = #{exPrice,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      TAX = #{tax,jdbcType=DECIMAL},
+      ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+    where EXPORT_PRODUCT_ID = #{exportProductId,jdbcType=VARCHAR}
+  </update>
+</mapper>

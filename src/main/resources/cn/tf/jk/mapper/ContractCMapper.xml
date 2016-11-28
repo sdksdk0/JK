@@ -119,6 +119,9 @@ c.CONTRACT_ID,c.OFFEROR,c.CONTRACT_NO,c.SIGNING_DATE,c.INPUT_BY,c.CHECK_BY,c.INS
 
 from  contract_c c
 
+where 1=1
+
+<if test="state!=null"> and c.state=#{state}</if>
 
   </select>
   

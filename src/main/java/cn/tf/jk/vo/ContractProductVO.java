@@ -13,7 +13,7 @@ public class ContractProductVO {
    
     private ContractC  contractC;
     
-    private List<ExtCproductC>  extCproductCs;
+    private List<ExtCproductVO>  extCproductCs;
     //和生产厂家是多对一的关系
     private FactoryC factoryC;
     
@@ -63,11 +63,11 @@ public class ContractProductVO {
 		this.contractC = contractC;
 	}
 
-	public List<ExtCproductC> getExtCproductCs() {
+	public List<ExtCproductVO> getExtCproductCs() {
 		return extCproductCs;
 	}
 
-	public void setExtCproductCs(List<ExtCproductC> extCproductCs) {
+	public void setExtCproductCs(List<ExtCproductVO> extCproductCs) {
 		this.extCproductCs = extCproductCs;
 	}
 
