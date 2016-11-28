@@ -11,7 +11,7 @@ public class ContractVO {
 	private String contractId;
 
 	//货物的集合
-	private List<ContractProductC>  contractProductCs;
+	private List<ContractProductVO>  contractProductCs;
 
     
     private String cpnum;
@@ -63,11 +63,13 @@ public class ContractVO {
     
     
 
-    public List<ContractProductC> getContractProductCs() {
+
+
+	public List<ContractProductVO> getContractProductCs() {
 		return contractProductCs;
 	}
 
-	public void setContractProductCs(List<ContractProductC> contractProductCs) {
+	public void setContractProductCs(List<ContractProductVO> contractProductCs) {
 		this.contractProductCs = contractProductCs;
 	}
 

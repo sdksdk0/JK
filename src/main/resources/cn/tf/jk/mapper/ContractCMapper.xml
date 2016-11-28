@@ -256,7 +256,7 @@ where c.contract_id=#{contractId}
       #{inspector,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, #{importNum,jdbcType=DECIMAL}, 
       #{crequest,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{deliveryPeriod,jdbcType=TIMESTAMP}, 
       #{shipTime,jdbcType=TIMESTAMP}, #{tradeTerms,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{printStyle,jdbcType=CHAR}, #{oldState,jdbcType=DECIMAL}, 0, 
+      1, #{oldState,jdbcType=DECIMAL}, 0, 
       #{outState,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, #{createDept,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>

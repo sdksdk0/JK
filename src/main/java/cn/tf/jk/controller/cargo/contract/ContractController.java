@@ -2,6 +2,9 @@ package cn.tf.jk.controller.cargo.contract;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cn.tf.jk.controller.BaseController;
 import cn.tf.jk.po.ContractC;
 import cn.tf.jk.po.FactoryC;
+import cn.tf.jk.print.ContractPrint;
 import cn.tf.jk.service.ContractCService;
 import cn.tf.jk.vo.ContractVO;
 
@@ -81,6 +85,15 @@ public class ContractController extends  BaseController{
 		public String cancel(@RequestParam("contractId") String[] contractIds){
 			contractCService.cancel(contractIds);
 			return "redirect:/cargo/contract/list.action";
+		}
+		
+		//打印
+		@RequestMapping("/cargo/contract/print.action")
+		public void print(String contractId, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ContractPrint cp = new ContractPrint();
+			
+			ContractVO obj = contractCService.view(contractId);
+			cp.print(obj, request.getSession().getServletContext().getRealPath("/"), response);
 		}
 	
 
