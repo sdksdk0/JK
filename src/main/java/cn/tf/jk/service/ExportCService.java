@@ -14,7 +14,7 @@ public interface ExportCService {
 	public List<ExportC> find(Map paraMap);				//带条件查询，条件可以为null，既没有条件；返回list对象集合
 	public ExportC get(Serializable id);					//只查询一个，常用于修改
 	public void insert(String[] contractIds);					//插入，用实体作为参数
-	public void update(ExportC entity);					//修改，用实体作为参数
+	public void update(ExportC export);				//修改，用实体作为参数
 	public void deleteById(Serializable id);		//按id删除，删除一条；支持整数型和字符串类型ID
 	public void delete(Serializable[] ids);	
 	
@@ -28,6 +28,8 @@ public interface ExportCService {
 	//获得购销合同列表
 	public List<ContractC>  getContractList();
 	
-	
+	public String getMrecordData(String exportId);		//拼接js串
+
+
 
 }

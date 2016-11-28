@@ -68,7 +68,7 @@
 </head>
 <body>
 <form method="post">
-	<input type="hidden" name="id" value="${obj.id}"/>
+	<input type="hidden" name="exportId" value="${obj.exportId}"/>
 
 <div id="menubar">
 <div id="middleMenubar">

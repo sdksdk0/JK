@@ -132,10 +132,12 @@ public class ExportCServiceImpl implements ExportCService{
 	}
 
 	@Override
-	public void update(ExportC entity) {
-		exportCDao.update(entity);
+	public void update(ExportC export){
+		exportCDao.update(export);
+		
 		
 	}
+
 
 	@Override
 	public void deleteById(Serializable id) {
@@ -174,6 +176,23 @@ public class ExportCServiceImpl implements ExportCService{
 		paraMap.put("state", 1);
 		return  contractCDao.find(paraMap);
 	}
+	
+	//拼接JS串
+		//function addTRRecord(objId, id, productNo, cnumber, grossWeight, netWeight, sizeLength, sizeWidth, sizeHeight, exPrice, tax)
+		public String getMrecordData(String exportId){
+			Map paraMap = new HashMap();
+			paraMap.put("exportId", exportId);
+			
+			List<ExportProductC> oList = exportProductDao.find(paraMap );
+			
+			StringBuffer sBuf = new StringBuffer();
+			for(ExportProductC ep : oList){
+				sBuf.append("addTRRecord(\"mRecordTable\", \"").append(ep.getExportProductId()).append("\", \"").append(ep.getProductNo()).append("\", \"").append(ep.getCnumber()).append("\", \"").append(UtilFuns.convertNull(ep.getGrossWeight())).append("\", \"").append(UtilFuns.convertNull(ep.getNetWeight())).append("\", \"").append(UtilFuns.convertNull(ep.getSizeLength())).append("\", \"").append(UtilFuns.convertNull(ep.getSizeWidth())).append("\", \"").append(UtilFuns.convertNull(ep.getSizeHeight())).append("\", \"").append(UtilFuns.convertNull(ep.getExPrice())).append("\", \"").append(UtilFuns.convertNull(ep.getTax())).append("\");");
+			}
+			
+			return sBuf.toString();
+		}
+	
 
 	
 }

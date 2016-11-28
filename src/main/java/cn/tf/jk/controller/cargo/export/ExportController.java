@@ -46,9 +46,39 @@ public class ExportController extends BaseController{
 		return "redirect:/cargo/export/list.action";
 	}
 	
+	//修改
+	@RequestMapping("/cargo/export/toUpdate.action")
+	public String toUpdate(String exportId,Model model){
+		ExportC obj=exportCService.get(exportId);
+		model.addAttribute("obj",obj);
+		return "/cargo/export/jExportUpdate.jsp";
+		
+	}
 	
+	@RequestMapping("/cargo/export/update.action")
+	public String update(ExportC exportC){
+		exportCService.update(exportC);
+		return "redirect:/cargo/export/list.action";
+	}
 	
+	//上报
+	@RequestMapping("/cargo/export/submit.action")
+	public String submit(@RequestParam("exportId") String[] exportIds){
+		exportCService.submit(exportIds);
+		return "redirect:/cargo/export/list.action";
+	}
+	//取消
+	@RequestMapping("/cargo/export/cancel.action")
+	public String cancel(@RequestParam("exportId") String[] exportIds){
+		exportCService.cancel(exportIds);
+		return "redirect:/cargo/export/list.action";
+	}
 	
-	
+	//删除
+	@RequestMapping("/cargo/export/delete.action")
+	public String delete(@RequestParam("exportId") String[] exportIds){
+		exportCService.delete(exportIds);
+		return "redirect:/cargo/export/list.action";
+	}
 
 }
