@@ -8,7 +8,7 @@
 </head>
 <body>
 <form method="post">
-	<input type="hidden" name="id" value="${obj.id}"/>
+	<input type="hidden" name="packingListId" value="${obj.packingListId}"/>
 
 <div id="menubar">
 <div id="middleMenubar">
@@ -71,7 +71,7 @@
 <div>
 
 <div style="text-align:left;">
-	${divData}
+	${divDate}
 </div>
  
 </form>

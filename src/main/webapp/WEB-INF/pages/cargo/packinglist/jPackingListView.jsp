@@ -65,7 +65,7 @@
 <div>
 
 <div style="text-align:left;">
-	${divData}
+	${divDate}
 </div>
  
 </form>

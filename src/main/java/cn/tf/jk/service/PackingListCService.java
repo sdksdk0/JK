@@ -18,6 +18,8 @@ public interface PackingListCService {
 	public void delete(Serializable[] ids);	
 	
 	public String getDivDate(String[]  exportIds);
+	public String getDivDataUpdate(String[] split, String[] split2);
+	public Object getDivDataView(String[] split);
 	
 
 }

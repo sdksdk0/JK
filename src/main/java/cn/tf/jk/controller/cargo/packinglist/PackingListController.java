@@ -46,12 +46,44 @@ public class PackingListController  extends  BaseController {
 	}
 	
 	
+	@RequestMapping("/cargo/packinglist/toUpdate.action")
+	public String toupdate(String packingListId, Model model){
+		PackingListC obj = packingListCService.get(packingListId);
+		model.addAttribute("obj", obj);
+		
+		String _s = packingListCService.getDivDataUpdate(obj.getExportIds().split("\\|"), obj.getExportNos().split("\\|"));
+		model.addAttribute("divDate", _s);	
+				
+		return "/cargo/packinglist/jPackingListUpdate.jsp";
+	}
+	
+	@RequestMapping("/cargo/packinglist/update.action")
+	public String update(PackingListC packingList){
+		packingListCService.update(packingList);
+		
+		return "redirect:/cargo/packinglist/list.action";
+	}
 	
 	
+	@RequestMapping("/cargo/packinglist/toView.action")
+	public String toview(String packingListId, Model model){
+		PackingListC obj = packingListCService.get(packingListId);
+		model.addAttribute("obj", obj);
+		
+		model.addAttribute("divDate", packingListCService.getDivDataView(obj.getExportNos().split("\\|")));
+		
+		return "/cargo/packinglist/jPackingListView.jsp";
+	}
 	
 	
-	
-	
+	@RequestMapping("/cargo/packinglist/delete.action")
+	public String delete(@RequestParam("packingListId") String[]  packingListIds){
+		
+		packingListCService.delete(packingListIds);
+		
+		
+		return "redirect:/cargo/packinglist/list.action";
+	}
 	
 	
 	

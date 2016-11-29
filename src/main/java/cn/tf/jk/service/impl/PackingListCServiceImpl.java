@@ -16,6 +16,7 @@ import cn.tf.jk.pagination.Page;
 import cn.tf.jk.po.ExportC;
 import cn.tf.jk.po.PackingListC;
 import cn.tf.jk.service.PackingListCService;
+import cn.tf.jk.util.UtilFuns;
 
 @Service
 public class PackingListCServiceImpl implements PackingListCService{
@@ -46,16 +47,20 @@ public class PackingListCServiceImpl implements PackingListCService{
 	}
 
 	@Override
-	public void insert(PackingListC factory) {
+	public void insert(PackingListC entity) {
 		
-		factory.setPackingListId(UUID.randomUUID().toString());
+		this.spellString(entity);
 		
-		packingListCDao.insert(factory);
+		
+		entity.setPackingListId(UUID.randomUUID().toString());
+		
+		packingListCDao.insert(entity);
 		
 	}
 
 	@Override
 	public void update(PackingListC entity) {
+		this.spellString(entity);
 		packingListCDao.update(entity);
 		
 	}
@@ -83,8 +88,51 @@ public class PackingListCServiceImpl implements PackingListCService{
 		}
 		return buffer.toString();
 	}
+	
+	
+	//拼接HTML片段
+		public String getDivDataUpdate(String[] exportIds, String[] exportNos){
+			StringBuffer sBuf = new StringBuffer();
+			for(int i=0;i<exportIds.length;i++){
+				sBuf.append("<input type=\"checkbox\" name=\"exportIds\" checked value=\"").append(exportIds[i]).append("|").append(exportNos[i]).append("\" class=\"input\"/>");
+				sBuf.append(exportNos[i]).append("&nbsp;&nbsp;");
+			}
+			
+			return sBuf.toString();
+		}
+		
+		//拼接HMTL片段
+		public String getDivDataView(String[] exportNos){
+			StringBuffer sBuf = new StringBuffer();
+			for(int i=0;i<exportNos.length;i++){
+				sBuf.append(exportNos[i]).append("&nbsp;&nbsp;");
+			}
+			
+			return sBuf.toString();
+		}
+		
+	
+	
 
-
+		//拆串，拼串
+		private PackingListC spellString(PackingListC packingList){
+			String _exportIds = "";
+			String _exportNos = "";
+			
+			String[] _s = packingList.getExportIds().split(",");		//id|no
+			for(int i=0;i<_s.length;i++){	
+				String[] _tmp = _s[i].split("\\|");						//正则表达式，转义
+				_exportIds +=  _tmp[0] + "|";
+				_exportNos +=  _tmp[1] + "|";
+			}
+			_exportIds = UtilFuns.delLastChar(_exportIds);
+			_exportNos = UtilFuns.delLastChar(_exportNos);
+			
+			packingList.setExportIds(_exportIds);
+			packingList.setExportNos(_exportNos);
+			
+			return packingList;
+		}
 
 
 
