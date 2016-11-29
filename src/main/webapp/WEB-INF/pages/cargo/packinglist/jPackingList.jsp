@@ -15,13 +15,10 @@
   <div id="navMenubar">
 <ul>
 <li id="view"><a href="#" onclick="formSubmit('toview.action','_self');this.blur();">查看</a></li>
-<li id="update"><a href="#" onclick="formSubmit('toUpdate.action','_self');this.blur();">修改</a></li>
+<li id="update"><a href="#" onclick="formSubmit('toupdate.action','_self');this.blur();">修改</a></li>
 <li id="delete"><a href="#" onclick="formSubmit('delete.action','_self');this.blur();">删除</a></li>
-<li id="new"><a href="#" onclick="formSubmit('submit.action','_self');this.blur();">上报</a></li>
-<li id="new"><a href="#" onclick="formSubmit('cancel.action','_self');this.blur();">取消</a></li>
-<li id="new"><a href="#" onclick="formSubmit('${ctx}/cargo/packinglist/toCreat.action','_self');this.blur();">装箱</a></li>
-
-
+<!-- <li id="new"><a href="#" onclick="formSubmit('submit.action','_self');this.blur();">上报</a></li>
+<li id="new"><a href="#" onclick="formSubmit('cancel.action','_self');this.blur();">取消</a></li> -->
 </ul>
   </div>
 </div>
@@ -32,7 +29,7 @@
   <div class="textbox-header">
   <div class="textbox-inner-header">
   <div class="textbox-title">
-    出口报运列表
+    装箱列表
   </div> 
   </div>
   </div>
@@ -43,17 +40,12 @@
 <table id="ec_table" class="tableRegion" width="98%" >
 	<thead>
 	<tr>
-		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('exportId',this)"></td>
+		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('packingListId',this)"></td>
 		<td class="tableHeader">序号</td>
-		<td class="tableHeader">合同或确认书号</td>
-		<td class="tableHeader">信用证号</td>
-		<td class="tableHeader">货物数/附件数</td>
-		<td class="tableHeader">收货人及地址</td>
-		<td class="tableHeader">装运港</td>
-		<td class="tableHeader">目的港</td>
-		<td class="tableHeader">运输方式</td>
-		<td class="tableHeader">价格条件</td>
-		<td class="tableHeader">制单日期</td>
+		<td class="tableHeader">卖家</td>
+		<td class="tableHeader">买家</td>
+		<td class="tableHeader">发票号</td>
+		<td class="tableHeader">发票日期</td>
 		<td class="tableHeader">状态</td>
 	</tr>
 	</thead>
@@ -61,17 +53,12 @@
 	
 	<c:forEach items="${dataList}" var="o" varStatus="status">
 	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
-		<td><input type="checkbox" name="exportId" value="${o.exportId}"/></td>
+		<td><input type="checkbox" name="packingListId" value="${o.packingListId}"/></td>
 		<td>${status.index+1}</td>
-		<td><a href="toview.action?id=${o.exportId}">${o.customerContract}</a></td>
-		<td>${o.lcno}</td>
-		<td align="center">${o.epnum}/${o.extnum}</td>
-		<td>${o.consignee}</td>
-		<td>${o.shipmentPort}</td>
-		<td>${o.destinationPort}</td>
-		<td>${o.transportMode}</td>
-		<td>${o.priceCondition}</td>
-		<td><fmt:formatDate value="${o.inputDate}" pattern="yyyy-MM-dd"/></td>
+		<td>${o.seller}</td>
+		<td>${o.buyer}</td>
+		<td>${o.invoiceNo}</td>
+		<td><fmt:formatDate value="${o.invoiceDate}" pattern="yyyy-MM-dd"/></td>
 		<td>
 			<c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
 			<c:if test="${o.state==0}">草稿</c:if>

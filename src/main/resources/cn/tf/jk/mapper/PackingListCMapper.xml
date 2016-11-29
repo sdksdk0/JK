@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tf.jk.mapper.PackingListCMapper" >
+  <resultMap id="BaseResultMap" type="cn.tf.jk.po.PackingListC" >
+    <id column="PACKING_LIST_ID" property="packingListId" jdbcType="VARCHAR" />
+    <result column="SELLER" property="seller" jdbcType="VARCHAR" />
+    <result column="BUYER" property="buyer" jdbcType="VARCHAR" />
+    <result column="INVOICE_NO" property="invoiceNo" jdbcType="VARCHAR" />
+    <result column="INVOICE_DATE" property="invoiceDate" jdbcType="TIMESTAMP" />
+    <result column="MARKS" property="marks" jdbcType="VARCHAR" />
+    <result column="DESCRIPTIONS" property="descriptions" jdbcType="VARCHAR" />
+    <result column="EXPORT_IDS" property="exportIds" jdbcType="VARCHAR" />
+    <result column="EXPORT_NOS" property="exportNos" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DEPT" property="createDept" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PACKING_LIST_ID, SELLER, BUYER, INVOICE_NO, INVOICE_DATE, MARKS, DESCRIPTIONS, EXPORT_IDS, 
+    EXPORT_NOS, STATE, CREATE_BY, CREATE_DEPT, CREATE_TIME
+  </sql>
+  
+  <select id="find" parameterType="map" resultMap="BaseResultMap">
+		select * from packing_list_c
+		where 1=1
+	</select>
+	
+	<select id="get" parameterType="string" resultMap="BaseResultMap">
+		select * from packing_list_c
+		where packing_list_id=#{pid}
+	</select>
+  
+  <!-- 删除一条 -->
+	<delete id="deleteById" parameterType="string">
+		delete from packing_list_c
+		where packing_list_id=#{pid}
+	</delete>
+	
+	<!-- 删除多条（一维字符串数组） -->
+	<delete id="delete" parameterType="string">
+		delete from packing_list_c
+		where packing_list_id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PACKING_LIST_C
+    where PACKING_LIST_ID = #{packingListId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PACKING_LIST_C
+    where PACKING_LIST_ID = #{packingListId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tf.jk.po.PackingListC" >
+    insert into PACKING_LIST_C (PACKING_LIST_ID, SELLER, BUYER, 
+      INVOICE_NO, INVOICE_DATE, MARKS, 
+      DESCRIPTIONS, EXPORT_IDS, EXPORT_NOS, 
+      STATE, CREATE_BY, CREATE_DEPT, 
+      CREATE_TIME)
+    values (#{packingListId,jdbcType=VARCHAR}, #{seller,jdbcType=VARCHAR}, #{buyer,jdbcType=VARCHAR}, 
+      #{invoiceNo,jdbcType=VARCHAR}, #{invoiceDate,jdbcType=TIMESTAMP}, #{marks,jdbcType=VARCHAR}, 
+      #{descriptions,jdbcType=VARCHAR}, #{exportIds,jdbcType=VARCHAR}, #{exportNos,jdbcType=VARCHAR}, 
+      0, #{createBy,jdbcType=VARCHAR}, #{createDept,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tf.jk.po.PackingListC" >
+    insert into PACKING_LIST_C
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="packingListId != null" >
+        PACKING_LIST_ID,
+      </if>
+      <if test="seller != null" >
+        SELLER,
+      </if>
+      <if test="buyer != null" >
+        BUYER,
+      </if>
+      <if test="invoiceNo != null" >
+        INVOICE_NO,
+      </if>
+      <if test="invoiceDate != null" >
+        INVOICE_DATE,
+      </if>
+      <if test="marks != null" >
+        MARKS,
+      </if>
+      <if test="descriptions != null" >
+        DESCRIPTIONS,
+      </if>
+      <if test="exportIds != null" >
+        EXPORT_IDS,
+      </if>
+      <if test="exportNos != null" >
+        EXPORT_NOS,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="packingListId != null" >
+        #{packingListId,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNo != null" >
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDate != null" >
+        #{invoiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marks != null" >
+        #{marks,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptions != null" >
+        #{descriptions,jdbcType=VARCHAR},
+      </if>
+      <if test="exportIds != null" >
+        #{exportIds,jdbcType=VARCHAR},
+      </if>
+      <if test="exportNos != null" >
+        #{exportNos,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="cn.tf.jk.po.PackingListC" >
+    update PACKING_LIST_C
+    <set >
+      <if test="seller != null" >
+        SELLER = #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null" >
+        BUYER = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNo != null" >
+        INVOICE_NO = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDate != null" >
+        INVOICE_DATE = #{invoiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marks != null" >
+        MARKS = #{marks,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptions != null" >
+        DESCRIPTIONS = #{descriptions,jdbcType=VARCHAR},
+      </if>
+      <if test="exportIds != null" >
+        EXPORT_IDS = #{exportIds,jdbcType=VARCHAR},
+      </if>
+      <if test="exportNos != null" >
+        EXPORT_NOS = #{exportNos,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDept != null" >
+        CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PACKING_LIST_ID = #{packingListId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tf.jk.po.PackingListC" >
+    update PACKING_LIST_C
+    set SELLER = #{seller,jdbcType=VARCHAR},
+      BUYER = #{buyer,jdbcType=VARCHAR},
+      INVOICE_NO = #{invoiceNo,jdbcType=VARCHAR},
+      INVOICE_DATE = #{invoiceDate,jdbcType=TIMESTAMP},
+      MARKS = #{marks,jdbcType=VARCHAR},
+      DESCRIPTIONS = #{descriptions,jdbcType=VARCHAR},
+      EXPORT_IDS = #{exportIds,jdbcType=VARCHAR},
+      EXPORT_NOS = #{exportNos,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DEPT = #{createDept,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where PACKING_LIST_ID = #{packingListId,jdbcType=VARCHAR}
+  </update>
+</mapper>

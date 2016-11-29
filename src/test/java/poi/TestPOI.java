@@ -58,12 +58,6 @@ public class TestPOI {
 		font.setFontName("微软雅黑");  //设置字体类型
 		font.setFontHeightInPoints((short) 26);  //设置字体大小
 		titleStyle.setFont(font);
-		
-		//再创建一个单元格
-		
-		
-		
-		
 					
 		nCell.setCellStyle(titleStyle);
 		//6.保存

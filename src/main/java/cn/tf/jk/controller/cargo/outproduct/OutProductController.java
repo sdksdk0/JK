@@ -318,15 +318,11 @@ public class OutProductController extends BaseController{
 		nRow=sheet.createRow(rowNo++);
 		
 		nRow.setHeightInPoints(36);
-		
-		
-		
-		
+	
 		nCell=nRow.createCell(1);
 		nCell.setCellValue(inputDate.replace("-0", "年").replaceFirst("-", "年")+"月份出货表");
 		nCell.setCellStyle(this.bigTitle(wb, nStyle, font));
-		
-		
+
 		
 		String[] title=new 	String[]{"客户","订单号","货号","数量","工厂","附件","工厂交期","船期","贸易条款"  };
 		
