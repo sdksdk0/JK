@@ -29,6 +29,8 @@
 				<li><a href="${ctx }/cargo/export/list.action" onclick="linkHighlighted(this)" target="main" id="aa_1">出口报运</a></li>	
 				<li><a href="${ctx }/cargo/packinglist/list.action" onclick="linkHighlighted(this)" target="main" id="aa_1">装箱</a></li>
 				<li><a href="${ctx }/cargo/contracthis/list.action" onclick="linkHighlighted(this)" target="main" id="aa_1">历史购销合同</a></li>
+				<li><a href="${ctx }/ws/export/toEdit.action" onclick="linkHighlighted(this)" target="main" id="aa_1">ws出口报运单</a></li>
+			
 			</ul>
         </div>
         </div>
