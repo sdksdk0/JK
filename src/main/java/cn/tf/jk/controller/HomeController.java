@@ -69,4 +69,25 @@ public class HomeController {
 	public String cargoLeft(){
 		return "/cargo/left.jsp";
 	}
+	
+	
+	//统计分析
+	@RequestMapping("/statMain.action")
+	public String statMain(){
+		return "/stat/main.jsp";
+	}
+	
+	@RequestMapping("/statLeft.action")
+	public String statLeft(){
+		return "/stat/left.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

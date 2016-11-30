@@ -29,6 +29,17 @@
 		<property  name="mapperLocations"  value="classpath:cn/tf/jk/mapper/*.xml" ></property>
 	</bean>
 	
+	<!-- 整合spring的jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="sqlDao" class="cn.tf.jk.common.springdao.SqlDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	
+	
+	
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>

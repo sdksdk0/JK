@@ -205,6 +205,7 @@
 			    		<div id="menuContent"><span id="topmenu"
 onclick="top.location.href='fmain.action';linkHighlightMenu(this);">系统首页</span><span id="tm_separator"></span><span id="topmenu" 
 onclick="top.leftFrame.location.href='cargoLeft.action';top.main.location.href='cargoMain.action';linkHighlightMenu(this);">货运管理</span><span id="tm_separator"></span><span id="topmenu"
+onclick="top.leftFrame.location.href='statLeft.action';top.main.location.href='statMain.action';linkHighlightMenu(this);">统计分析</span><span id="tm_separator"></span><span id="topmenu" 
 onclick="top.leftFrame.location.href='baseinfoLeft.action';top.main.location.href='baseinfoMain.action';linkHighlightMenu(this);">基础信息</span><span id="tm_separator"></span><span id="topmenu" 
 onclick="top.leftFrame.location.href='sysadminLeft.action';top.main.location.href='sysadminMain.action';linkHighlightMenu(this);">系统管理</span></div>
 					</div>
