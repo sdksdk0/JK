@@ -108,51 +108,51 @@ create table CONTRACT_C
 );
 
 comment on table CONTRACT_C is
-'����ο��û��ṩ�ġ�������ͬ��
-�˸��ֶδӡ�������ͬ���л�ȡ����һ�����ܽ������ֶ�
-�ĸ��ֶδӡ����������л�ȡ
-���������ֶ�
-����Ȩ���ֶ�';
+'界面参考用户提供的《供销合同》
+八个字段从《购销合同》中获取，加一个“总金额”冗余字段
+四个字段从《出货表》中获取
+六个控制字段
+三个权限字段';
 
 comment on column CONTRACT_C.CONTRACT_NO is
-'�Զ�����';
+'自动产生';
 
 comment on column CONTRACT_C.TOTAL_AMOUNT is
-'���࣬�Զ����㣬����*����';
+'冗余，自动计算，数量*单价';
 
 comment on column CONTRACT_C.IMPORT_NUM is
-'��ӡʱ��ʶ������,��Ӧ˵���е�����
-ֱ�Ӵ�����ǿ����𣿿���CHAR(6)����jspҳ��jstl�ж����������ַ�ʧ�ܡ�';
+'打印时标识几个星,对应说明中的内容
+直接存放星星可以吗？可以CHAR(6)。但jsp页面jstl判断星星特殊字符失败。';
 
 comment on column CONTRACT_C.CUSTOM_NAME is
-'����:������';
+'出处:出货表';
 
 comment on column CONTRACT_C.DELIVERY_PERIOD is
-'����:������';
+'出处:出货表';
 
 comment on column CONTRACT_C.SHIP_TIME is
-'����:������';
+'出处:出货表';
 
 comment on column CONTRACT_C.TRADE_TERMS is
-'����:������';
+'出处:出货表';
 
 comment on column CONTRACT_C.PRINT_STYLE is
-'��2:һҳ��������  խ1:һҳһ������';
+'宽2:一页两个货物  窄1:一页一个货物';
 
 comment on column CONTRACT_C.OLD_STATE is
-'�鵵ǰ״̬, �������';
+'归档前状态, 方便回退';
 
 comment on column CONTRACT_C.STATE is
-'0�ݸ� 1���ϱ�������
+'0草稿 1已上报待报运
 
-�鵵��, ����ѡ���ͬ�ĵط���ȥ��.
-��ʾ��ͬ�����, �����Ƿ��ͬ�Ļ����Ƿ�ȫ���������, ��Ϊ���⸶���������';
+归档后, 其他选择合同的地方均去除.
+表示合同已完成, 不论是否合同的货物是否全部真的走完, 因为有赔付等其他情况';
 
 comment on column CONTRACT_C.OUT_STATE is
-'0δ�߻� 1���� 2ȫ��
+'0未走货 1部分 2全部
 
-�鵵��, ����ѡ���ͬ�ĵط���ȥ��.
-��ʾ��ͬ�����, �����Ƿ��ͬ�Ļ����Ƿ�ȫ���������, ��Ϊ���⸶���������';
+归档后, 其他选择合同的地方均去除.
+表示合同已完成, 不论是否合同的货物是否全部真的走完, 因为有赔付等其他情况';
 
 /*==============================================================*/
 /* Table: CONTRACT_HIS_C                                        */
@@ -185,36 +185,36 @@ create table CONTRACT_HIS_C
 );
 
 comment on table CONTRACT_HIS_C is
-'��ʷ���ͻ������������������ֶζ����ı䣻�����¼��ת�ơ�
+'历史表就换表名，主键、其他字段都不改变；方便记录“转移”
 
-Mapperӳ���ļ��ͺͺ�ͬ������������贴��po�������ú�ͬ��';
+Mapper映射文件就和合同差个表名，无需创建po对象，利用合同的';
 
 comment on column CONTRACT_HIS_C.CONTRACT_NO is
-'�Զ�����';
+'自动产生';
 
 comment on column CONTRACT_HIS_C.TOTAL_AMOUNT is
-'����';
+'冗余';
 
 comment on column CONTRACT_HIS_C.IMPORT_NUM is
-'��ӡʱ��ʶ������,��Ӧ˵���е�����';
+'打印时标识几个星,对应说明中的内容';
 
 comment on column CONTRACT_HIS_C.PRINT_STYLE is
-'��2:һҳ��������  խ1:һҳһ������';
+'宽2:一页两个货物  窄1:一页一个货物';
 
 comment on column CONTRACT_HIS_C.OLD_STATE is
-'�鵵ǰ״̬, �������';
+'归档前状态, 方便回退';
 
 comment on column CONTRACT_HIS_C.STATE is
-'0�ݸ� 1���ϱ�������
+'0草稿 1已上报待报运
 
-�鵵��, ����ѡ���ͬ�ĵط���ȥ��.
-��ʾ��ͬ�����, �����Ƿ��ͬ�Ļ����Ƿ�ȫ���������, ��Ϊ���⸶���������';
+归档后, 其他选择合同的地方均去除.
+表示合同已完成, 不论是否合同的货物是否全部真的走完, 因为有赔付等其他情况';
 
 comment on column CONTRACT_HIS_C.OUT_STATE is
-'0δ�߻� 1���� 2ȫ��
+'0未走货 1部分 2全部
 
-�鵵��, ����ѡ���ͬ�ĵط���ȥ��.
-��ʾ��ͬ�����, �����Ƿ��ͬ�Ļ����Ƿ�ȫ���������, ��Ϊ���⸶���������';
+归档后, 其他选择合同的地方均去除.
+表示合同已完成, 不论是否合同的货物是否全部真的走完, 因为有赔付等其他情况';
 
 /*==============================================================*/
 /* Table: CONTRACT_PRODUCT_C                                    */
@@ -242,33 +242,33 @@ create table CONTRACT_PRODUCT_C
 );
 
 comment on table CONTRACT_PRODUCT_C is
-'װ�ʺ���������ҵ��ʹ�ã���ͬҵ��ʹ�á�';
+'装率和箱数报运业务使用，合同业务不使用。';
 
 comment on column CONTRACT_PRODUCT_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column CONTRACT_PRODUCT_C.OUT_NUMBER is
-'�ִ��߻�';
+'分次走货';
 
 comment on column CONTRACT_PRODUCT_C.LOADING_RATE is
-'����ҵ��ʹ��X/Y';
+'报运业务使用X/Y';
 
 comment on column CONTRACT_PRODUCT_C.BOX_NUM is
-'����ҵ��ʹ��=��������װ�ʵķ�ĸ��������λΪ����
-�Ƚ�������װСֽ���ӣ�Ȼ����װ��װ��';
+'报运业务使用=数量除以装率的分母，不够进位为整数
+先将玻璃杯装小纸箱子，然后在装集装箱';
 
 comment on column CONTRACT_PRODUCT_C.PACKING_UNIT is
 'PCS/SETS';
 
 comment on column CONTRACT_PRODUCT_C.AMOUNT is
-'���� �Զ�����: ����x����';
+'冗余 自动计算: 数量x单价';
 
 comment on column CONTRACT_PRODUCT_C.FINISHED is
-'0δ���1���';
+'0未完成1完成';
 
 comment on column CONTRACT_PRODUCT_C.EXTS is
-'���࣬������������
-������ӦSYS_CODE�еĸ����������ƣ�����û��з�������û�и�����д�ޡ�����������ͬʱ�ϲ���';
+'冗余，出处：出货表
+附件对应SYS_CODE中的附件分类名称，多个用换行符隔开，没有附件是写无。附件分类相同时合并。';
 
 /*==============================================================*/
 /* Table: CONTRACT_PRODUCT_HIS_C                                */
@@ -290,31 +290,32 @@ create table CONTRACT_PRODUCT_HIS_C
    PRICE                NUMBER(10,2),
    AMOUNT               NUMBER(10,2),
    FINISHED             INT,
+   EXTS                 VARCHAR2(50),
    ORDER_NO             INT,
    constraint PK_CONTRACT_PRODUCT_HIS_C primary key (CONTRACT_PRODUCT_ID)
 );
 
 comment on column CONTRACT_PRODUCT_HIS_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column CONTRACT_PRODUCT_HIS_C.OUT_NUMBER is
-'�ִ��߻�';
+'分次走货';
 
 comment on column CONTRACT_PRODUCT_HIS_C.LOADING_RATE is
-'����ҵ��ʹ��X/Y';
+'报运业务使用X/Y';
 
 comment on column CONTRACT_PRODUCT_HIS_C.BOX_NUM is
-'����ҵ��ʹ��=��������װ�ʵķ�ĸ��������λΪ����
-�Ƚ�������װСֽ���ӣ�Ȼ����װ��װ��';
+'报运业务使用=数量除以装率的分母，不够进位为整数
+先将玻璃杯装小纸箱子，然后在装集装箱';
 
 comment on column CONTRACT_PRODUCT_HIS_C.PACKING_UNIT is
 'PCS/SETS';
 
 comment on column CONTRACT_PRODUCT_HIS_C.AMOUNT is
-'���� �Զ�����: ����x����';
+'冗余 自动计算: 数量x单价';
 
 comment on column CONTRACT_PRODUCT_HIS_C.FINISHED is
-'0δ���1���';
+'0未完成1完成';
 
 /*==============================================================*/
 /* Table: EXPORT_C                                              */
@@ -344,21 +345,21 @@ create table EXPORT_C
 );
 
 comment on table EXPORT_C is
-'һ�����˵��ɶ����ͬ��
-����ƣ�������ֱ��һ�Զ����������CONTRACT_IDS��¼������ϵ��
+'一个报运单由多个合同来
+简化设计，不建立直接一对多关联。利用CONTRACT_IDS记录关联关系。
 
-�����ƣ�ʵ����Ծ��ѯ';
+打断设计，实现跳跃查询';
 
 comment on column EXPORT_C.CONTRACT_IDS is
-'ID���ϴ�
+'ID集合串
 
 x,y,z';
 
 comment on column EXPORT_C.CUSTOMER_CONTRACT is
-'�ͻ��ĺ�ͬ��,��ѡ������ͬ';
+'客户的合同号,可选择多个合同';
 
 comment on column EXPORT_C.LCNO is
-'����֤��L/C T/T';
+'信用证号L/C T/T';
 
 comment on column EXPORT_C.TRANSPORT_MODE is
 'SEA/AIR';
@@ -367,22 +368,22 @@ comment on column EXPORT_C.PRICE_CONDITION is
 'FOB/CIF';
 
 comment on column EXPORT_C.STATE is
-'0-�ݸ� 1-���ϱ� 2-װ�� 3-ί�� 4-��Ʊ 5-����';
+'0-草稿 1-已上报 2-装箱 3-委托 4-发票 5-财务';
 
 comment on column EXPORT_C.GROSS_WEIGHT is
-'���࣬Ϊί�з���һ�����˵���ë��';
+'冗余，为委托服务，一个报运的总毛重';
 
 comment on column EXPORT_C.NET_WEIGHT is
-'���࣬Ϊί�з���һ�����˵��ܾ���
+'冗余，为委托服务，一个报运的总净重
 
 ';
 
 comment on column EXPORT_C.MEASUREMENT is
-'���࣬Ϊί�з���һ�����˵������
+'冗余，为委托服务，一个报运的总体积
 
-=��x��x��/100 00 00
+=长x高x宽/100 00 00
 
-cmת��Ϊm3 ������
+cm转换为m3 立方米
 
 ';
 
@@ -412,19 +413,19 @@ create table EXPORT_PRODUCT_C
 );
 
 comment on column EXPORT_PRODUCT_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column EXPORT_PRODUCT_C.PACKING_UNIT is
 'PCS/SETS';
 
 comment on column EXPORT_PRODUCT_C.CNUMBER is
-'�ִ��߻��ڴ�����';
+'分次走货在此体现';
 
 comment on column EXPORT_PRODUCT_C.BOX_NUM is
-'���Ǻ�ͬ�е�����';
+'就是合同中的箱数';
 
 comment on column EXPORT_PRODUCT_C.EX_PRICE is
-'sales confirmation �еļ۸����';
+'sales confirmation 中的价格（手填）';
 
 /*==============================================================*/
 /* Table: EXT_CPRODUCT_C                                        */
@@ -449,16 +450,16 @@ create table EXT_CPRODUCT_C
 );
 
 comment on table EXT_CPRODUCT_C is
-'�����ͻ���Ĳ�ͬ�����˸������ͺ�Ҫ��ͬʱ���������ͬ�������������';
+'附件和货物的不同：多了附件类型和要求；同时货物从属合同，附件从属货物。';
 
 comment on column EXT_CPRODUCT_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column EXT_CPRODUCT_C.CTYPE is
 'SYS_CODE_B 0104';
 
 comment on column EXT_CPRODUCT_C.AMOUNT is
-'�Զ�����: ����x����';
+'自动计算: 数量x单价';
 
 /*==============================================================*/
 /* Table: EXT_CPRODUCT_HIS_C                                    */
@@ -483,7 +484,7 @@ create table EXT_CPRODUCT_HIS_C
 );
 
 comment on column EXT_CPRODUCT_HIS_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column EXT_CPRODUCT_HIS_C.CTYPE is
 'SYS_CODE_B 0104';
@@ -492,7 +493,7 @@ comment on column EXT_CPRODUCT_HIS_C.PACKING_UNIT is
 'PCS/SETS';
 
 comment on column EXT_CPRODUCT_HIS_C.AMOUNT is
-'�Զ�����: ����x����';
+'自动计算: 数量x单价';
 
 /*==============================================================*/
 /* Table: EXT_EPRODUCT_C                                        */
@@ -517,11 +518,11 @@ create table EXT_EPRODUCT_C
 );
 
 comment on table EXT_EPRODUCT_C is
-'ֱ�Ӹ��ƺ�ͬ���������������ࣻ���ٺ���ҵ���ȡ����
-��Ƽ򵥣�������Ӧ����仯';
+'直接复制合同附件表，整表冗余；加速后续业务读取数据
+设计简单，方便适应需求变化';
 
 comment on column EXT_EPRODUCT_C.FACTORY_NAME is
-'����';
+'冗余';
 
 comment on column EXT_EPRODUCT_C.CTYPE is
 'SYS_CODE_B 0104';
@@ -530,7 +531,7 @@ comment on column EXT_EPRODUCT_C.PACKING_UNIT is
 'PCS/SETS';
 
 comment on column EXT_EPRODUCT_C.AMOUNT is
-'�Զ�����: ����x����';
+'自动计算: 数量x单价';
 
 /*==============================================================*/
 /* Table: FACTORY_C                                             */
@@ -555,7 +556,7 @@ create table FACTORY_C
 );
 
 comment on column FACTORY_C.STATE is
-'1����0ͣ��';
+'1正常0停用';
 
 comment on column FACTORY_C.ORDER_NO is
 '
@@ -577,10 +578,10 @@ create table FINANCE_C
 );
 
 comment on table FINANCE_C is
-'��װ�䵥һ��һ';
+'和装箱单一对一';
 
 comment on column FINANCE_C.STATE is
-'0�ݸ� 1���ϱ�';
+'0草稿 1已上报';
 
 /*==============================================================*/
 /* Table: INVOICE_C                                             */
@@ -599,16 +600,16 @@ create table INVOICE_C
 );
 
 comment on table INVOICE_C is
-'��װ�䵥һ��һ';
+'和装箱单一对一';
 
 comment on column INVOICE_C.INVOICE_ID is
-'PACKING_LIST_IDֵ';
+'PACKING_LIST_ID值';
 
 comment on column INVOICE_C.SC_NO is
-'packing.getExportNos S/C���Ǳ��˵ĺ�ͬ��';
+'packing.getExportNos S/C就是报运的合同号';
 
 comment on column INVOICE_C.STATE is
-'0�ݸ� 1���ϱ�';
+'0草稿 1已上报';
 
 /*==============================================================*/
 /* Table: LOGIN_LOG_P                                           */
@@ -653,16 +654,16 @@ create table PACKING_LIST_C
 );
 
 comment on table PACKING_LIST_C is
-'ѡ�������˽���һ��װ��';
+'选择多个报运建立一个装箱';
 
 comment on column PACKING_LIST_C.EXPORT_IDS is
-'����ID����';
+'报运ID集合';
 
 comment on column PACKING_LIST_C.EXPORT_NOS is
-'����NO����x,y|z,h';
+'报运NO集合x,y|z,h';
 
 comment on column PACKING_LIST_C.STATE is
-'0�ݸ� 1���ϱ�';
+'0草稿 1已上报';
 
 /*==============================================================*/
 /* Table: SHIPPING_ORDER_C                                      */
@@ -695,22 +696,22 @@ create table SHIPPING_ORDER_C
 );
 
 comment on table SHIPPING_ORDER_C is
-'һ��ί������һ��װ��';
+'一个委托来自一个装箱';
 
 comment on column SHIPPING_ORDER_C.SHIPPING_ORDER_ID is
-'����PACKING_LIST_ID';
+'等于PACKING_LIST_ID';
 
 comment on column SHIPPING_ORDER_C.ORDER_TYPE is
-'SEA����AIR����';
+'SEA海运AIR空运';
 
 comment on column SHIPPING_ORDER_C.IS_BATCH is
-'1��0��';
+'1是0否';
 
 comment on column SHIPPING_ORDER_C.IS_TRANS is
-'1��0��';
+'1是0否';
 
 comment on column SHIPPING_ORDER_C.STATE is
-'0�ݸ� 1���ϱ�';
+'0草稿 1已上报';
 
 /*==============================================================*/
 /* Table: SYS_CODE_B                                            */
@@ -736,10 +737,10 @@ create table SYS_CODE_B
 );
 
 comment on table SYS_CODE_B is
-'�����ֵ�';
+'数据字典';
 
 comment on column SYS_CODE_B.STATE is
-'0ͣ��1����';
+'0停用1启用';
 
 alter table CONTRACT_PRODUCT_C
    add constraint FK_CONTRACT_REFERENCE_CONTRACT foreign key (CONTRACT_ID)

@@ -1,9 +1,10 @@
 package cn.tf.jk.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ExportC {
+public class ExportC implements Serializable{
     private String exportId;
     
     private  String  epnum;

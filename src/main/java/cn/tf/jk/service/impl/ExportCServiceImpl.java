@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,7 @@ import cn.tf.jk.vo.ContractVO;
 import cn.tf.jk.vo.ExtCproductVO;
 
 @Service
+@WebService
 public class ExportCServiceImpl implements ExportCService{
 
 	@Autowired
@@ -40,15 +44,25 @@ public class ExportCServiceImpl implements ExportCService{
 	private ExportProductDao exportProductDao;
 	@Autowired
 	private ExtEproductDao extEproductDao;
-
 	
 	
+	
+	//利用set方法在cxf中注入dao，这样cxf的webservice才可以查询数据
+	@WebMethod(exclude=true)
+	public void setExportCDao(ExportCDao exportCDao) {
+		this.exportCDao = exportCDao;
+	}
+	
+	
+	
+	
+	@WebMethod(exclude=true)
 	@Override
 	public List<ExportC> findPage(Page page) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return exportCDao.findPage(page);
 	}
-
+	@WebMethod(exclude=true)
 	@Override
 	public List<ExportC> find(Map paraMap) {
 		
@@ -56,11 +70,12 @@ public class ExportCServiceImpl implements ExportCService{
 	}
 
 	@Override
-	public ExportC get(Serializable id) {
+	public ExportC get(String id) {
 		
 		return exportCDao.get(id);
 	}
-
+	
+	@WebMethod(exclude=true)
 	@Override
 	public void insert(String[] contractIds) {
 		
@@ -131,6 +146,7 @@ public class ExportCServiceImpl implements ExportCService{
 		
 	}
 
+	@WebMethod(exclude=true)
 	@Override
 	public void update(ExportC export){
 		exportCDao.update(export);
@@ -138,19 +154,19 @@ public class ExportCServiceImpl implements ExportCService{
 		
 	}
 
-
+	@WebMethod(exclude=true)
 	@Override
 	public void deleteById(Serializable id) {
 		exportCDao.deleteById(id);
 		
 	}
-
+	@WebMethod(exclude=true)
 	@Override
 	public void delete(Serializable[] ids) {
 		exportCDao.delete(ids);
 		
 	}
-
+	@WebMethod(exclude=true)
 	@Override
 	public void submit(Serializable[] ids) {
 		Map map=new HashMap<>();
@@ -160,7 +176,7 @@ public class ExportCServiceImpl implements ExportCService{
 		exportCDao.updateState(map);
 		
 	}
-
+	@WebMethod(exclude=true)
 	@Override
 	public void cancel(Serializable[] ids) {
 		Map map=new HashMap<>();
@@ -169,7 +185,7 @@ public class ExportCServiceImpl implements ExportCService{
 		exportCDao.updateState(map);
 		
 	}
-
+	@WebMethod(exclude=true)
 	@Override
 	public List<ContractC> getContractList() {
 		Map paraMap=new HashMap<>();

@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>cn.tf.jk</groupId>
-  <artifactId>JK</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <url>http://maven.apache.org</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.tf.jk</groupId>
+	<artifactId>JK</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
@@ -173,7 +174,7 @@
 			<version>0.9.1.2</version>
 		</dependency>
 
-		
+
 
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -185,15 +186,23 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>3.0.0-milestone2</version>
 		</dependency>
-	<!-- Jetty is needed if you're using the CXFServlet -->
-		<!-- 	<dependency>
+		<!-- Jetty is needed if you're using the CXFServlet -->
+		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http-jetty</artifactId>
 			<version>3.0.0-milestone2</version>
-		</dependency> -->
+		</dependency>
+	
+
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>5.0.4</version>
+			<type>pom</type>
+		</dependency>
 
 
-		
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -243,19 +252,19 @@
 			<version>2.4.2</version>
 		</dependency>
 
-		
+
 	</dependencies>
-  
-  
-  
-  <build>
-  	<plugins>
-  		<plugin>
-  			<artifactId>maven-war-plugin</artifactId>
-  			<configuration>
-  				<version>2.5</version>
-  			</configuration>
-  		</plugin>
-  	</plugins>
-  </build>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<version>2.5</version>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
